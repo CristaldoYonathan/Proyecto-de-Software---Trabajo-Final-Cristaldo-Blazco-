@@ -1,4 +1,13 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+
+    <!-- En esta sección se pueden agregar los items nuevos para la navbar -->
+    @php($navlinks = [
+        ['href' => '/dashboard' , 'name' => 'Inicio','text' => 'dashboard' ],
+        ['href' => '/about', 'name' => 'Contactanos', 'text' => 'about'],
+        ['href' => '/admin', 'name' => 'Admin', 'text' => 'admin'],
+
+    ])
+
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -12,9 +21,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
+                    @foreach ($navlinks as $navlink)
+                        <x-jet-nav-link href="{{ $navlink['href'] }}" :active="request()->routeIs($navlink['href'])">
+                            {{ $navlink['name'] }}
+                        </x-jet-nav-link>
+                    @endforeach
+
                 </div>
             </div>
 
@@ -137,9 +149,12 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-jet-responsive-nav-link>
+{{--            Tomar los valores del array de navlinks--}}
+            @foreach ($navlinks as $navlink)
+                <x-jet-responsive-nav-link href="{{ $navlink['href'] }}" :active="request()->routeIs($navlink['href'])">
+                    {{ $navlink['name'] }}
+                </x-jet-responsive-nav-link>
+            @endforeach
         </div>
 
         <!-- Responsive Settings Options -->

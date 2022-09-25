@@ -1,4 +1,5 @@
-<x-guest-layout>
+<x-guest-layout >
+    <x-slot name="title">Iniciar Sesión</x-slot>
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
@@ -42,6 +43,12 @@
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}
                 </x-jet-button>
+            </div>
+{{--            boton de registrarse--}}
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('Registrarse') }}
+                </a>
             </div>
         </form>
     </x-jet-authentication-card>

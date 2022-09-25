@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 //Pagina de Inicio
 Route::view('/','welcome')->name('inicio');
+
 //Pagina de registro de propiedad
 Route::get('/registroPropiedad',[PublicacionController::class, 'index'])->name('publicaciones.index');//Pagina principal para el registro de propiedad
 Route::get('/registroPropiedad/create',[PublicacionController::class, 'create'])->name('publicaciones.create');//Crear Publicacion
@@ -25,8 +26,8 @@ Route::delete('/registroPropiedad/{publicacion}',[PublicacionController::class, 
 
 //Pagina de Alquileres
 Route::view('/alquileres','alquileres')->name('alquileres');
-//Pagina de About
-Route::view('/about','layouts.app')->name('about');
+//Ruta about
+Route::view('/about','about')->name('about');
 
 
 Route::get('/', function () {

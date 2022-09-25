@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Easy Rent')
+@section('title', 'Easy-Rent')
 
 @section('content_header')
     <h1>ACÁ VA UN TITULO</h1>
@@ -31,10 +31,3 @@
     </div>
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
-@stop

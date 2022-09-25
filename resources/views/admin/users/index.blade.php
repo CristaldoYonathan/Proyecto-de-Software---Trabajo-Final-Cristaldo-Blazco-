@@ -3,18 +3,10 @@
 @section('title', 'Easy Rent')
 
 @section('content_header')
-{{--    el siguiente es el titulo tendrá una clase de bootstrap--}}
-    <h1>Listado de usuarios</h1>
+    <h1>Lista de usuarios</h1>
 @stop
 
 @section('content')
-
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
+    @livewire('admin.users-index')
+{{--    @livewire('admin.users-index')--}}
 @stop
