@@ -3,6 +3,8 @@
     <!-- En esta sección se pueden agregar los items nuevos para la navbar -->
     @php($navlinks = [
         ['href' => '/dashboard' , 'name' => 'Inicio','text' => 'dashboard' ],
+        ['href' => '/registroPropiedad', 'name' => 'Publicar', 'text' => 'publicaciones.index'],
+        ['href' => '/alquileres', 'name' => 'Alquilar', 'text' => 'alquileres'],
         ['href' => '/about', 'name' => 'Contactanos', 'text' => 'about'],
         ['href' => '/admin', 'name' => 'Admin', 'text' => 'admin'],
 
