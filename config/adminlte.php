@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Easy-Rent',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,12 +63,13 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Easy</b>Rent',
+//    Logo-EasyRent.png
+    'logo_img' => 'img/Logo-ER.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo_img_alt' => 'EasyRent',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +87,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'img/Logo-ER.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -109,11 +110,11 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'img/Logo-EasyRent.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 300,
+            'height' => 200,
         ],
     ],
 
@@ -291,25 +292,20 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+//        [
+//            'type'         => 'navbar-search',
+//            'text'         => 'search',
+//            'topnav_right' => true,
+//        ],
+//        [
+//            'type'         => 'fullscreen-widget',
+//            'topnav_right' => true,
+//        ],
 
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
             'text' => 'Buscar',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
         ],
         [
             'text'        => 'Inicio',
@@ -322,6 +318,13 @@ return [
             'text'        => 'Usuarios',
             'url'         => 'admin/users',
             'icon'        => 'fas fa-fw fa-users',
+//            'label'       => 4,
+//            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Roles',
+            'url'         => 'admin/roles',
+            'icon'        => 'fas fa-fw fa-user-lock',
 //            'label'       => 4,
 //            'label_color' => 'success',
         ]
@@ -553,4 +556,6 @@ return [
     */
 
     'livewire' => false,
+
+
 ];

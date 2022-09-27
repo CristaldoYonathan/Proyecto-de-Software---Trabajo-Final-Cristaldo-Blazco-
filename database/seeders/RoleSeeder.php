@@ -18,30 +18,77 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-//        En esta seccion se crean 4 roles: admin, inquilino, propietario e invitado y se le asigna una variabla a cada uno de ellos
-        $admin = Role::create(['name' => 'admin']);
-        $inquilino = Role::create(['name' => 'inquilino']);
-        $propietario = Role::create(['name' => 'propietario']);
-        $invitado = Role::create(['name' => 'invitado']);
 
-//        Creacion de persimos para todas las rutas existentes en el proyecto con operaciones de CRUD
+        DB::table('permissions')->insert([
+            'name' => 'create',
+            'guard_name' => 'web',
+            'description' => 'Create a new record',
+        ],
+        [
+            'name' => 'read',
+            'guard_name' => 'web',
+            'description' => 'Read a record',
+        ],
+        [
+            'name' => 'update',
+            'guard_name' => 'web',
+            'description' => 'Update a record',
+        ],
+        [
+            'name' => 'delete',
+            'guard_name' => 'web',
+            'description' => 'Delete a record',
+        ],
+        [
+            'name' => 'restore',
+            'guard_name' => 'web',
+            'description' => 'Restore a record',
+        ],
+        [
+            'name' => 'forceDelete',
+            'guard_name' => 'web',
+            'description' => 'Force delete a record',
+        ]);
 
-        Permission::create(['name' => 'admin.home', 'description' => 'Ver el dashboard'])->syncRoles([$admin, $inquilino, $propietario, $invitado]);
-        Permission::create(['name' => 'admin.users.index', 'description' => 'Ver listado de usuarios'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.users.edit', 'description' => 'Asignar rol a usuarios'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.users.destroy', 'description' => 'Eliminar usuarios'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.roles.index', 'description' => 'Ver listado de roles'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.roles.create', 'description' => 'Crear roles'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.roles.edit', 'description' => 'Editar roles'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.roles.destroy', 'description' => 'Eliminar roles'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.permissions.index', 'description' => 'Ver listado de permisos'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.permissions.create', 'description' => 'Crear permisos'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.permissions.edit', 'description' => 'Editar permisos'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.permissions.destroy', 'description' => 'Eliminar permisos'])->syncRoles([$admin]);
-        Permission::create(['name' => 'admin.properties.index', 'description' => 'Ver listado de propiedades'])->syncRoles([$admin, $inquilino, $propietario, $invitado]);
-        Permission::create(['name' => 'admin.properties.create', 'description' => 'Crear propiedades'])->syncRoles([$admin, $propietario]);
-        Permission::create(['name' => 'admin.properties.edit', 'description' => 'Editar propiedades'])->syncRoles([$admin, $propietario]);
-        Permission::create(['name' => 'admin.properties.destroy', 'description' => 'Eliminar propiedades'])->syncRoles([$admin, $propietario]);
+
+        DB::table('roles')->insert([
+            'name' => 'Admin',
+            'guard_name' => 'web',
+            'description' => 'Admin',
+        ],
+        [
+            'name' => 'User',
+            'guard_name' => 'web',
+            'description' => 'User',
+        ]);
+
+
+
+//
+////        En esta seccion se crean 4 roles: admin, inquilino, propietario e invitado y se le asigna una variabla a cada uno de ellos
+//        $admin = Role::create(['name' => 'admin']);
+//        $inquilino = Role::create(['name' => 'inquilino']);
+//        $propietario = Role::create(['name' => 'propietario']);
+//        $invitado = Role::create(['name' => 'invitado']);
+//
+////        Creacion de persimos para todas las rutas existentes en el proyecto con operaciones de CRUD
+//
+//        Permission::create(['name' => 'admin.home', 'description' => 'Ver el dashboard'])->syncRoles([$admin, $inquilino, $propietario, $invitado]);
+//        Permission::create(['name' => 'admin.users.index', 'description' => 'Ver listado de usuarios'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.users.edit', 'description' => 'Asignar rol a usuarios'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.users.destroy', 'description' => 'Eliminar usuarios'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.roles.index', 'description' => 'Ver listado de roles'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.roles.create', 'description' => 'Crear roles'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.roles.edit', 'description' => 'Editar roles'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.roles.destroy', 'description' => 'Eliminar roles'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.permissions.index', 'description' => 'Ver listado de permisos'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.permissions.create', 'description' => 'Crear permisos'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.permissions.edit', 'description' => 'Editar permisos'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.permissions.destroy', 'description' => 'Eliminar permisos'])->syncRoles([$admin]);
+//        Permission::create(['name' => 'admin.properties.index', 'description' => 'Ver listado de propiedades'])->syncRoles([$admin, $inquilino, $propietario, $invitado]);
+//        Permission::create(['name' => 'admin.properties.create', 'description' => 'Crear propiedades'])->syncRoles([$admin, $propietario]);
+//        Permission::create(['name' => 'admin.properties.edit', 'description' => 'Editar propiedades'])->syncRoles([$admin, $propietario]);
+//        Permission::create(['name' => 'admin.properties.destroy', 'description' => 'Eliminar propiedades'])->syncRoles([$admin, $propietario]);
 
     }
 }

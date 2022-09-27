@@ -23756,8 +23756,6 @@ hr.horizontal.gray-light {
 
   .navbar-vertical.navbar-expand-lg .lavalamp-object {
     width: calc(100% - 1rem) !important;
-    /*background: theme-color("primary");*/
-    /*color: color-yiq(#e91e63);*/
     margin-right: 0.5rem;
     margin-left: 0.5rem;
     padding-left: 1rem;
