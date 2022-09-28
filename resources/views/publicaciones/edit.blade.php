@@ -1,5 +1,5 @@
-<x-layouts.app titulo="Modificar una propiedad publicada">
-
+<x-app-layout>
+    <x-slot name="title">Modificar una propiedad publicada</x-slot>
     <h1>Modificar una propiedad publicada</h1>
 
     <form action="{{route('publicaciones.update', $publicacion)}}" method="POST">
@@ -29,18 +29,18 @@
                 <small style="color:red">{{$message}}</small>
                 @enderror
             </div>
-            <div class="input-group">
-                <label>Subtipo de Propiedad</label>
-                {{--                <input name="subtipo_propiedad" type="text" value="{{old('subtipo_propiedad')}}">--}}
-                <select name="subtipo_propiedad">
-                    <option>Seleccione el tipo de propiedad</option>
-                    <option value="Chalet">Chalet</option>
-                    <option value="Monoambiente">Monoambiente</option>
-                </select>
-                @error('subtipo_propiedad')
-                <small style="color:red">{{$message}}</small>
-                @enderror
-            </div>
+{{--            <div class="input-group">--}}
+{{--                <label>Subtipo de Propiedad</label>--}}
+{{--                --}}{{--                <input name="subtipo_propiedad" type="text" value="{{old('subtipo_propiedad')}}">--}}
+{{--                <select name="subtipo_propiedad">--}}
+{{--                    <option>Seleccione el tipo de propiedad</option>--}}
+{{--                    <option value="Chalet">Chalet</option>--}}
+{{--                    <option value="Monoambiente">Monoambiente</option>--}}
+{{--                </select>--}}
+{{--                @error('subtipo_propiedad')--}}
+{{--                <small style="color:red">{{$message}}</small>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
             <div class="">
                 <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
             </div>
@@ -48,21 +48,21 @@
         <div class="form-step">
             <div class="input-group">
                 <label>Direccion (Ingrese calle y altura)</label>
-                <input name="direccion" type="text" value="{{old('direccion',$publicacion->direccion_propiedad)}}">
-                @error('direccion')
-                <small style="color:red">{{$message}}</small>
-                @enderror
+{{--                <input name="direccion" type="text" value="{{old('direccion',$publicacion->direccion_propiedad)}}">--}}
+{{--                @error('direccion')--}}
+{{--                <small style="color:red">{{$message}}</small>--}}
+{{--                @enderror--}}
             </div>
             <div class="input-group">
                 <label>Provincia</label>
-                {{--                <input name="provincia" type="text" value="{{old('provincia')}}">--}}
-                <select name="provincia" value="{{old('provincia',$publicacion->provincia_propiedad)}}">
-                    <option>Seleccione la provincia</option>
-                    <option value="Misiones" >Misiones</option>
-                </select>
-                @error('provincia')
-                <small style="color:red">{{$message}}</small>
-                @enderror
+{{--                                <input name="provincia" type="text" value="{{old('provincia')}}">--}}
+{{--                <select name="provincia" value="{{old('provincia',$publicacion->provincia_propiedad)}}">--}}
+{{--                    <option>Seleccione la provincia</option>--}}
+{{--                    <option value="Misiones" >Misiones</option>--}}
+{{--                </select>--}}
+{{--                @error('provincia')--}}
+{{--                <small style="color:red">{{$message}}</small>--}}
+{{--                @enderror--}}
             </div>
             <div class="input-group">
                 <label>Ciudad</label>
@@ -89,28 +89,28 @@
                 <label>Caracteristicas Generales</label>
                 <div class="input-group">
                     <label>Ambientes</label>
-                    <input name="ambientes" type="text" value="{{old('ambientes',$publicacion->ambientes_propiedad)}}">
+                    <input name="ambientes" type="text" value="{{old('ambientes',$publicacion->ambientes_publicacion)}}">
                     @error('ambientes')
                     <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="input-group">
                     <label>Dormitorios</label>
-                    <input name="dormitorios" type="text" value="{{old('dormitorios',$publicacion->dormitorios_propiedad)}}">
+                    <input name="dormitorios" type="text" value="{{old('dormitorios',$publicacion->dormitorios_publicacion)}}">
                     @error('dormitorios')
                     <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="input-group">
                     <label>Baños</label>
-                    <input name="baños" type="text" value="{{old('baños',$publicacion->baños_propiedad)}}">
+                    <input name="baños" type="text" value="{{old('baños',$publicacion->banios_publicacion)}}">
                     @error('baños')
                     <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="input-group">
                     <label>Cocheras</label>
-                    <input name="cocheras" type="text" value="{{old('cocheras',$publicacion->cochera_propiedad)}}">
+                    <input name="cocheras" type="text" value="{{old('cocheras',$publicacion->cochera_publicacion)}}">
                     @error('cocheras')
                     <small style="color:red">{{$message}}</small>
                     @enderror
@@ -120,47 +120,47 @@
                 <label>Superficie de la propiedad</label><br>
                 <div class="input-group">
                     <label>Cubierta(Lo que ocupa la casa)</label>
-                    <input name="cubierta" type="text" value="{{old('cubierta',$publicacion->superficie_cubierta_propiedad)}}">
+                    <input name="cubierta" type="text" value="{{old('cubierta',$publicacion->superficie_cubierta_casa)}}">
                     @error('cubierta')
                     <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
                 <div class="input-group">
                     <label>Total(El valor del terreno completo)</label>
-                    <input name="total_terreno" type="text" value="{{old('total_terreno',$publicacion->superficie_total_propiedad)}}">
+                    <input name="total_terreno" type="text" value="{{old('total_terreno',$publicacion->superficie_total_terreno)}}">
                     @error('total_terreno')
                     <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
             </div>
             <div>
-                <label>Precio//Ver que onda esto porque se me hace que es 1 campo</label><br>
+                <label>Precio</label><br>
                 <div class="input-group">
                     <label>Precio Total</label>
-                    <input name="precio" type="text" value="{{old('precio',$publicacion->precio_propiedad)}}">
+                    <input name="precio" type="text" value="{{old('precio',$publicacion->precio_publicacion)}}">
                     @error('precio')
                     <small style="color:red">{{$message}}</small>
                     @enderror
                 </div>
-                <div class="input-group">
-                    <label>Monto Inicial</label>
-                    <input name="#" type="text" value="{{old('#')}}">
-                    @error('#')
-                    <small style="color:red">{{$message}}</small>
-                    @enderror
-                </div>
+{{--                <div class="input-group">--}}
+{{--                    <label>Monto Inicial</label>--}}
+{{--                    <input name="#" type="text" value="{{old('#')}}">--}}
+{{--                    @error('#')--}}
+{{--                    <small style="color:red">{{$message}}</small>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
             </div>
             <label>Descripcion</label>
             <div class="input-group">
                 <label>Titulo de la Publicacion</label>
-                <input name="titulo" type="text" value="{{old('titulo', $publicacion->titulo_publicacion_propiedad)}}">
+                <input name="titulo" type="text" value="{{old('titulo', $publicacion->titulo_publicacion)}}">
                 @error('titulo')
                 <small style="color:red">{{$message}}</small>
                 @enderror
             </div>
             <div class="text-group">
                 <label>Descripcion</label>
-                <textarea name="descripcion" >{{old('descripcion',$publicacion->descripcion_publicacion_propiedad)}}</textarea>
+                <textarea name="descripcion" >{{old('descripcion',$publicacion->descripcion_publicacion)}}</textarea>
                 @error('descripcion')
                 <small style="color:red">{{$message}}</small>
                 @enderror
@@ -246,4 +246,4 @@
 
     <a href="{{route('publicaciones.index')}}">Regresar</a>
 
-</x-layouts.app>
+</x-app-layout>

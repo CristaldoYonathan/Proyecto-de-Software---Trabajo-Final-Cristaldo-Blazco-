@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()//Ver la FK
     {
         Schema::create('publicacion', function (Blueprint $table) {
-            $table->id('id_publicacion');
+            $table->id();
 
             $table->string('estado_publicacion');
             $table->string('calle_publicacion');

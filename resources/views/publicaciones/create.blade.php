@@ -1,4 +1,6 @@
-<x-layouts.app titulo="Publicar una propiedad">
+<x-app-layout>
+
+    <x-slot name="title">Publicar una propiedad</x-slot>
 
     <h1 class="text-center">Publicar una propiedad</h1>
 
@@ -240,4 +242,4 @@
 
     <a href="{{route('publicaciones.index')}}">Regresar</a>
 
-</x-layouts.app>
+</x-app-layout>

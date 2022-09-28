@@ -41,24 +41,24 @@ class PublicacionController extends Controller
         ]);
         $publicacion = new Publicacion;
         //Pagina 1 del formulario
-        $publicacion->tipo_propiedad = $request->input('tipo_propiedad');
-        $publicacion->subtipo_propiedad = $request->input('subtipo_propiedad');
+        //$publicacion->titulo_publicacion = $request->input('tipo_propiedad');
+        //$publicacion->subtipo_propiedad = $request->input('subtipo_propiedad');
         //Pagina 2 del formulario
-        $publicacion->direccion_propiedad = $request->input('direccion');
-        $publicacion->provincia_propiedad = $request->input('provincia');
+        //$publicacion->direccion_propiedad = $request->input('direccion');
+        //$publicacion->provincia_propiedad = $request->input('provincia');
         //$publicacion->ciudad_propiedad = $request->input('ciudad');
         //Falta Ubicacion
 
         //Pagina 3 del formulario
-        $publicacion->ambientes_propiedad = $request->input('ambientes');
-        $publicacion->dormitorios_propiedad = $request->input('dormitorios');
-        $publicacion->baños_propiedad = $request->input('baños');
-        $publicacion->cochera_propiedad = $request->input('cocheras');
-        $publicacion->superficie_cubierta_propiedad = $request->input('cubierta');
-        $publicacion->superficie_total_propiedad = $request->input('total_terreno');
-        $publicacion->precio_propiedad = $request->input('precio');
-        $publicacion->titulo_publicacion_propiedad = $request->input('titulo');
-        $publicacion->descripcion_publicacion_propiedad = $request->input('descripcion');
+        $publicacion->ambientes_publicacion = $request->input('ambientes');
+        $publicacion->dormitorios_publicacion = $request->input('dormitorios');
+        $publicacion->banios_publicacion = $request->input('baños');
+        $publicacion->cochera_publicacion = $request->input('cocheras');
+        $publicacion->superficie_cubierta_casa = $request->input('cubierta');
+        $publicacion->superficie_total_terreno = $request->input('total_terreno');
+        $publicacion->precio_publicacion = $request->input('precio');
+        $publicacion->titulo_publicacion = $request->input('titulo');
+        $publicacion->descripcion_publicacion = $request->input('descripcion');
         //Pagina 4 del formulario
         //Falta imagen
 
@@ -85,24 +85,24 @@ class PublicacionController extends Controller
         ]);
         //$publicacion = Publicacion::find($publicacion); Funciona igual porque tenemos  Publicacion $publicacion como segundo parametro
         //Pagina 1 del formulario
-        $publicacion->tipo_propiedad = $request->input('tipo_propiedad');
-        $publicacion->subtipo_propiedad = $request->input('subtipo_propiedad');
+        //$publicacion->tipo_propiedad = $request->input('tipo_propiedad');
+        //$publicacion->subtipo_propiedad = $request->input('subtipo_propiedad');
         //Pagina 2 del formulario
-        $publicacion->direccion_propiedad = $request->input('direccion');
-        $publicacion->provincia_propiedad = $request->input('provincia');
+        //$publicacion->direccion_propiedad = $request->input('direccion');
+        //$publicacion->provincia_propiedad = $request->input('provincia');
         //$publicacion->ciudad_propiedad = $request->input('ciudad');
         //Falta Ubicacion
 
         //Pagina 3 del formulario
-        $publicacion->ambientes_propiedad = $request->input('ambientes');
-        $publicacion->dormitorios_propiedad = $request->input('dormitorios');
-        $publicacion->baños_propiedad = $request->input('baños');
-        $publicacion->cochera_propiedad = $request->input('cocheras');
-        $publicacion->superficie_cubierta_propiedad = $request->input('cubierta');
-        $publicacion->superficie_total_propiedad = $request->input('total_terreno');
-        $publicacion->precio_propiedad = $request->input('precio');
-        $publicacion->titulo_publicacion_propiedad = $request->input('titulo');
-        $publicacion->descripcion_publicacion_propiedad = $request->input('descripcion');
+        $publicacion->ambientes_publicacion = $request->input('ambientes');
+        $publicacion->dormitorios_publicacion = $request->input('dormitorios');
+        $publicacion->banios_publicacion = $request->input('baños');
+        $publicacion->cochera_publicacion = $request->input('cocheras');
+        $publicacion->superficie_cubierta_casa = $request->input('cubierta');
+        $publicacion->superficie_total_terreno = $request->input('total_terreno');
+        $publicacion->precio_publicacion = $request->input('precio');
+        $publicacion->titulo_publicacion = $request->input('titulo');
+        $publicacion->descripcion_publicacion = $request->input('descripcion');
         //Pagina 4 del formulario
         //Falta imagen
 
@@ -119,7 +119,9 @@ class PublicacionController extends Controller
 
     public function destroy(Request $request, Publicacion $publicacion)
     {
-        $publicacion->delete();
+//        $publicacion->delete();
+          $publicacion->estado_publicacion('desactivado');
+          $publicacion->save();
 
         return to_route('publicaciones.index')->with('estado_publicacion','Se elimino de manera exitosa la Publicacion');
     }
