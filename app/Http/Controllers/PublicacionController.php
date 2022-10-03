@@ -128,7 +128,7 @@ class PublicacionController extends Controller
     {
         $publicaciones = Publicacion::onlyTrashed()->get();
 
-        return view('publicaciones.borradores',['publicaciones'=> $publicaciones]);
+        return view('admin.publicaciones.borradores',['publicaciones'=> $publicaciones]);
     }
 
     public function eliminarPublicacionesBasura($id)

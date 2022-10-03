@@ -330,8 +330,8 @@ return [
         ],
         [
             'text'        => 'Propiedades',
-            'url'         => 'admin/#',//Cambiar a propiedades
-            'icon'        => 'fa-solid fa-house-chimney-crack',
+            'url'         => '/publicaciones/borrado',
+            'icon'        => 'fas fa-fw fa-home',
 //            'label'       => 4,
 //            'label_color' => 'success',
         ]
