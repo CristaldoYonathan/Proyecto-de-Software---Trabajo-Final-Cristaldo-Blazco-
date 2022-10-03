@@ -133,6 +133,13 @@ class PublicacionController extends Controller
         return view('admin.publicaciones.borradores',['publicaciones'=> $publicaciones]);
     }
 
+    public function borradoUsuario()
+    {
+        $publicaciones = Publicacion::onlyTrashed()->get();
+
+        return view('publicaciones.borradores.borradores',['publicaciones'=> $publicaciones]);
+    }
+
     public function eliminarPublicacionesBasura($id)
     {
         $publicaciones = Publicacion::onlyTrashed()->findOrFail($id);

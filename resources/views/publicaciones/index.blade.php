@@ -14,6 +14,5 @@
                 <button type="submit" style="color: red">Desactivar Publicacion</button>
             </form>
         </div>
-
     @endforeach
 </x-app-layout>

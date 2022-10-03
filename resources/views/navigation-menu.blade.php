@@ -7,7 +7,7 @@
         ['href' => '/alquileres', 'name' => 'Alquilar', 'text' => 'alquileres'],
         ['href' => '/about', 'name' => 'Contactanos', 'text' => 'about'],
         ['href' => '/admin', 'name' => 'Admin', 'text' => 'admin'],
-
+        ['href' => '/publicaciones/borradores/borrado', 'name' => 'Publicaciones Desactivadas', 'text' => 'publicaciones.borradoUsuario'],
     ])
 
     <!-- Primary Navigation Menu -->
