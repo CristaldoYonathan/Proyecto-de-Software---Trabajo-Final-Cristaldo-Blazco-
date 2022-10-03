@@ -119,10 +119,31 @@ class PublicacionController extends Controller
 
     public function destroy(Request $request, Publicacion $publicacion)
     {
-//        $publicacion->delete();
-          $publicacion->estado_publicacion('desactivado');
-          $publicacion->save();
+        $publicacion->delete();
 
         return to_route('publicaciones.index')->with('estado_publicacion','Se elimino de manera exitosa la Publicacion');
+    }
+
+    public function borrado()
+    {
+        $publicaciones = Publicacion::onlyTrashed()->get();
+
+        return view('publicaciones.borradores',['publicaciones'=> $publicaciones]);
+    }
+
+    public function eliminarPublicacionesBasura($id)
+    {
+        $publicaciones = Publicacion::onlyTrashed()->findOrFail($id);
+        $publicaciones->forceDelete();
+        return to_route('publicaciones.index')->with('estado_publicacion','Se restauro de manera exitosa la Publicacion');
+        //Esta ruta tiene que cambiarse para que te lleve a la parte de adminLTE
+    }
+
+    public function restaurarPublicacion($id)
+    {
+        $publicaciones = Publicacion::onlyTrashed()->findOrFail($id);
+        $publicaciones->restore();
+
+        return to_route('publicaciones.index')->with('estado_publicacion','Se restauro de manera exitosa la Publicacion');
     }
 }

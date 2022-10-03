@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('titulo_publicacion');
             $table->string('descripcion_publicacion');
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

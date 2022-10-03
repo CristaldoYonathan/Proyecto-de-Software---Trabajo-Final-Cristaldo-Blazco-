@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Publicacion extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     //permite reconocer la tabla por la convencion que pone en plural
     protected $table = 'publicacion';

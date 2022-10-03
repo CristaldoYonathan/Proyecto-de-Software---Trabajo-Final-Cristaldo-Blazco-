@@ -11,7 +11,7 @@
             <a href="{{route('publicaciones.edit',$publicacion)}}">Editar</a>&nbsp;
             <form action="{{route('publicaciones.destroy',$publicacion)}}" method="POST">
                 @csrf @method('DELETE')
-                <button type="submit">Eliminar</button>
+                <button type="submit">Desactivar Publicacion</button>
             </form>
         </div>
 

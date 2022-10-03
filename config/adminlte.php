@@ -327,6 +327,13 @@ return [
             'icon'        => 'fas fa-fw fa-user-lock',
 //            'label'       => 4,
 //            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Propiedades',
+            'url'         => 'admin/#',//Cambiar a propiedades
+            'icon'        => 'fa-solid fa-house-chimney-crack',
+//            'label'       => 4,
+//            'label_color' => 'success',
         ]
 
 //        [
