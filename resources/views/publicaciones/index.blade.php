@@ -3,7 +3,7 @@
 
     <h1>Registrar Propiedad</h1>
 
-    <a href="{{route('publicaciones.create')}}">Publicar una nueva propiedad</a>
+    <a style="color: #7e55c7"  href="{{route('publicaciones.create')}}">Publicar una nueva propiedad</a>
 
     @foreach($publicaciones as $publicacion)
         <div style="display: flex ; align-items: baseline ">
