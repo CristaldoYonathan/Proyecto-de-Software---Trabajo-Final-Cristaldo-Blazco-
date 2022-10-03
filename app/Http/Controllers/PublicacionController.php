@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Provincia;
 use App\Models\Publicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,12 +29,13 @@ class PublicacionController extends Controller
         return view('publicaciones.show',['publicacion'=> $publicacion]);
     }
 
-    public function create()
+    public function create(Provincia $provincia)
     {
-        return view('publicaciones.create');
+        $provincias = Provincia::get();
+        return view('publicaciones.create',['provincias'=> $provincias]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Provincia $provincia)
     {
         $request->validate([
             'titulo'=>['required'],
@@ -45,7 +47,7 @@ class PublicacionController extends Controller
         //$publicacion->subtipo_propiedad = $request->input('subtipo_propiedad');
         //Pagina 2 del formulario
         //$publicacion->direccion_propiedad = $request->input('direccion');
-        //$publicacion->provincia_propiedad = $request->input('provincia');
+//        $publicacion->provincia_propiedad = $request->input('provincia');
         //$publicacion->ciudad_propiedad = $request->input('ciudad');
         //Falta Ubicacion
 

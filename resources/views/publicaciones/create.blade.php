@@ -21,7 +21,8 @@
         <!--form panels-->
         <div class="row">
             <div class="col-12 col-lg-8 m-auto">
-                <form class="multisteps-form__form">
+                <form class="multisteps-form__form" action="{{route('publicaciones.store')}}" method="POST">
+                    @csrf
 
                     <!--PANEL TIPO DE PROPIEDAD-->
                     <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
@@ -33,9 +34,9 @@
 
                                 <select class="multisteps-form__select form-control" name="tipo_propiedad">
                                     <option selected="selected">Seleccione el tipo de propiedad</option>
-                                    <option>Seleccione el tipo de propiedad</option>
-                                    <option value="Departamento">Departamento</option>
-                                    <option value="Casa">Casa</option>
+{{--                                    @foreach($tipos_propiedad as $tipo_propiedad)--}}
+{{--                                        <option value="{{$tipo_propiedad->id}}">{{$tipo_propiedad->nombre_tipo_propiedad}}</option>--}}
+{{--                                    @endforeach--}}
                                 </select>
 
                                 @error('tipo_propiedad')
@@ -74,14 +75,15 @@
                             <div class="form-row mt-4 shadow-none p-3 mb-5 bg-light rounded">
                                 <select class="multisteps-form__select form-control" name="provincia">
                                     <option selected="selected">Seleccione la provincia</option>
-                                    <option value="Misiones">Misiones</option>
+                                    @foreach($provincias as $provincia)
+                                        <option value="{{$provincia->id}}">{{$provincia->nombre_provincia}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="form-row mt-4 shadow-none p-3 mb-5 bg-light rounded">
                                 <select class="multisteps-form__select form-control" name="provincia">
                                     <option selected="selected">Seleccione la ciudad</option>
-                                    <option value="Misiones">Misiones</option>
                                 </select>
                             </div>
                         </div>
@@ -160,8 +162,26 @@
 
                     <!--PANEL IMAGENES-->
                     <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                        <h3 class="multisteps-form__title">Fotos de la propiedad. Puede cargar hasta 3 imagenes</h3>
+                        <h3 class="multisteps-form__title">Fotos de la propiedad. Puede cargar hasta 5 imagenes</h3>
                         <div class="multisteps-form__content">
+
+                            <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
+                                <div class="col">
+                                    <input class="form-control" name="titulo" type="text" placeholder="Titulo de la publicacion" value="{{old('titulo')}}">
+                                    @error('titulo')
+                                        <small style="color:red">{{$message}}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
+                                <div class="col">
+                                    <textarea class="form-control" name="descripcion" placeholder="Descripcion de la publicacion">{{old('descripcion')}}</textarea>
+                                    @error('descripcion')
+                                        <small style="color:red">{{$message}}</small>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
@@ -277,7 +297,7 @@
                                 </div>
 
                                 <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " ">
+                                    <input type="checkbox" class="form-check-input ">
                                     <label class="form-check-label" for="exampleCheck1">Servicio de limpieza</label>
                                 </div>
 

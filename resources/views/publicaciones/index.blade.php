@@ -8,10 +8,10 @@
     @foreach($publicaciones as $publicacion)
         <div style="display: flex ; align-items: baseline ">
             <h2><a href="{{route('publicaciones.show',$publicacion->id)}}">{{$publicacion->titulo_publicacion}}</a></h2>&nbsp;
-            <a href="{{route('publicaciones.edit',$publicacion)}}">Editar</a>&nbsp;
+            <a href="{{route('publicaciones.edit',$publicacion)}}" style="color: #00bb00">Editar</a>&nbsp;
             <form action="{{route('publicaciones.destroy',$publicacion)}}" method="POST">
                 @csrf @method('DELETE')
-                <button type="submit">Desactivar Publicacion</button>
+                <button type="submit" style="color: red">Desactivar Publicacion</button>
             </form>
         </div>
 

@@ -1,88 +1,108 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Publicacion
+ *
+ * @property int $id
+ * @property string|null $estado_publicacion
+ * @property string|null $calle_publicacion
+ * @property int|null $altura_publicacion
+ * @property int|null $dormitorios_publicacion
+ * @property int|null $banios_publicacion
+ * @property int|null $cochera_publicacion
+ * @property int|null $ambientes_publicacion
+ * @property float|null $superficie_cubierta_casa
+ * @property string|null $imagen_uno_publicacion
+ * @property string|null $imagen_dos_publicacion
+ * @property string|null $imagen_tres_publicacion
+ * @property float|null $superficie_total_terreno
+ * @property float|null $precio_publicacion
+ * @property string|null $titulo_publicacion
+ * @property string|null $descripcion_publicacion
+ * @property string|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property int|null $id_usuario
+ * @property int|null $id_tipo_propiedad
+ * @property int|null $id_provincia
+ * @property int|null $id_ciudad
+ *
+ * @property Ciudad|null $ciudad
+ * @property Provincia|null $provincium
+ * @property TipoPropiedad|null $tipo_propiedad
+ * @property User|null $user
+ *
+ * @package App\Models
+ */
 class Publicacion extends Model
 {
-    use HasFactory, SoftDeletes;
+	use SoftDeletes;
+	protected $table = 'publicacion';
 
-    //permite reconocer la tabla por la convencion que pone en plural
-    protected $table = 'publicacion';
+	protected $casts = [
+		'altura_publicacion' => 'int',
+		'dormitorios_publicacion' => 'int',
+		'banios_publicacion' => 'int',
+		'cochera_publicacion' => 'int',
+		'ambientes_publicacion' => 'int',
+		'superficie_cubierta_casa' => 'float',
+		'superficie_total_terreno' => 'float',
+		'precio_publicacion' => 'float',
+		'id_usuario' => 'int',
+		'id_tipo_propiedad' => 'int',
+		'id_provincia' => 'int',
+		'id_ciudad' => 'int'
+	];
 
-//    declaración de atributos necesarios con su respectiva protección
-//    protected $fillable = [
-//        'estado_publicacion',
-//        'calle_publicacion',
-//        'altura_publicacion',
-//        'dormitorios_publicacion',
-//        'banios_publicacion',
-//        'cochera_publicacion',
-//        'ambientes_publicacion',
-//        'superficie_cubierta_casa',
-//        'imagen_uno_publicacion',
-//        'imagen_dos_publicacion',
-//        'imagen_tres_publicacion',
-//        'superficie_total_terreno',
-//        'precio_publicacion',
-//        'titulo_publicacion',
-//        'descripcion_publicacion',
-//    ];
-//
-//    //declaración de atributos que no se quieren mostrar
-//    protected $hidden = [
-//        'created_at',
-//        'updated_at',
-//    ];
-//
-//    //declaración de atributos que no se quieren mostrar
-//    protected $casts = [
-//        'created_at' => 'datetime',
-//        'updated_at' => 'datetime',
-//    ];
-//
-//    //declaración de atributos que no se quieren mostrar
-//    protected $dates = [
-//        'created_at',
-//        'updated_at',
-//    ];
-//
-//    //declaración de atributos que no se quieren mostrar
-//    protected $dateFormat = 'Y-m-d H:i:s';
-//
-//    //declaración de atributos que no se quieren mostrar
-//    protected $connection = 'mysql';
-//
-//    //declaración de atributos que no se quieren mostrar
-//    protected $primaryKey = 'id_publicacion';
-//
-//    //declaración de atributos que no se quieren mostrar
-//    protected $keyType = 'int';
-//
-//    //declaración de atributos que no se quieren mostrar
-//    public $incrementing = true;
-//
-//    //declaración de atributos que no se quieren mostrar
-//    public $timestamps = true;
-//
-//    //declaración de atributos que no se quieren mostrar
-//    public $with = [];
-//
-//    //declaración de atributos que no se quieren mostrar
-//    public $withCount = [];
-//
-//    //declaración de atributos que no se quieren mostrar
-//    public $perPage = 15;
-//
-//    //declaración de atributos que no se quieren mostrar
-//    public $exists = false;
-//
-//    //declaración de atributos que no se quieren mostrar
-//    public $wasRecentlyCreated = false;
-//
-//    //declaración de atributos que no se quieren mostrar
-//    protected $attributes = [];
+	protected $fillable = [
+		'estado_publicacion',
+		'calle_publicacion',
+		'altura_publicacion',
+		'dormitorios_publicacion',
+		'banios_publicacion',
+		'cochera_publicacion',
+		'ambientes_publicacion',
+		'superficie_cubierta_casa',
+		'imagen_uno_publicacion',
+		'imagen_dos_publicacion',
+		'imagen_tres_publicacion',
+		'superficie_total_terreno',
+		'precio_publicacion',
+		'titulo_publicacion',
+		'descripcion_publicacion',
+		'id_usuario',
+		'id_tipo_propiedad',
+		'id_provincia',
+		'id_ciudad'
+	];
+
+	public function ciudad()
+	{
+		return $this->belongsTo(Ciudad::class, 'id_ciudad');
+	}
+
+	public function provincia()
+	{
+		return $this->belongsTo(Provincia::class, 'id_provincia');
+	}
+
+	public function tipo_propiedad()
+	{
+		return $this->belongsTo(TipoPropiedad::class, 'id_tipo_propiedad');
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'id_usuario');
+	}
 }

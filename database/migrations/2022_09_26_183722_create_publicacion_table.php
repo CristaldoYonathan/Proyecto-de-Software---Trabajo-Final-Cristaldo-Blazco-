@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()//Ver la FK
+    public function up()
     {
         Schema::create('publicacion', function (Blueprint $table) {
             $table->id();
@@ -34,6 +34,44 @@ return new class extends Migration
 
             $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::table('publicacion', function (Blueprint $table) {
+            $table->foreignId('id_usuario')->constrained('users');
+        });
+
+        //crear tabla Tipo de propiedad
+        Schema::create('tipo_propiedad', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre_tipo_propiedad');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+        //crear tabla provincia
+        Schema::create('provincia', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre_provincia');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+        //crear tabla localidad
+        Schema::create('ciudad', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre_ciudad');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+        //crear clave foreanea de tipo de propiedad
+        Schema::table('publicacion', function (Blueprint $table) {
+            $table->foreignId('id_tipo_propiedad')->constrained('tipo_propiedad');
+        });
+        //crear clave foreanea de provincia
+        Schema::table('publicacion', function (Blueprint $table) {
+            $table->foreignId('id_provincia')->constrained('provincia');
+        });
+        //crear clave foreanea de ciudad
+        Schema::table('publicacion', function (Blueprint $table) {
+            $table->foreignId('id_ciudad')->constrained('ciudad');
         });
     }
 

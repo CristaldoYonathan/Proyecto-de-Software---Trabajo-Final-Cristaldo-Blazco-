@@ -12,10 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Provincia
+ * Class TipoPropiedad
  *
  * @property int $id
- * @property string $nombre_provincia
+ * @property string $nombre_tipo_propiedad
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -24,17 +24,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class Provincia extends Model
+class TipoPropiedad extends Model
 {
 	use SoftDeletes;
-	protected $table = 'provincia';
+	protected $table = 'tipo_propiedad';
 
 	protected $fillable = [
-		'nombre_provincia'
+		'nombre_tipo_propiedad'
 	];
 
 	public function publicacion()
 	{
-		return $this->hasMany(Publicacion::class, 'id_provincia');
+		return $this->hasMany(Publicacion::class, 'id_tipo_propiedad');
 	}
 }
