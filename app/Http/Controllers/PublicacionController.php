@@ -103,7 +103,7 @@ class PublicacionController extends Controller
     {
         $request->validate([
             'titulo'=>['required'],
-            'descripcion'=>['required']
+            'descripcion'=>['required'],
         ]);
         //$publicacion = Publicacion::find($publicacion); Funciona igual porque tenemos  Publicacion $publicacion como segundo parametro
         //Pagina 1 del formulario
