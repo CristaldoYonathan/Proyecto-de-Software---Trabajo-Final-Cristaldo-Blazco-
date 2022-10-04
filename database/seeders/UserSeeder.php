@@ -14,6 +14,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+//        crear un usuario con correo: a@gmail.com y contraseña: 12345678
+        \App\Models\User::factory(1)->create([
+            'email' => 'a@gmail.com',
+            'password' => bcrypt('12345678')
+        ]);
         \App\Models\User::factory(50)->create();
     }
 }

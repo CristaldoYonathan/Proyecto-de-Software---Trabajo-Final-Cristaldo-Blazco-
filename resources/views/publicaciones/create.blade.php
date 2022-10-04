@@ -34,9 +34,9 @@
 
                                 <select class="multisteps-form__select form-control" name="tipo_propiedad">
                                     <option selected="selected">Seleccione el tipo de propiedad</option>
-{{--                                    @foreach($tipos_propiedad as $tipo_propiedad)--}}
-{{--                                        <option value="{{$tipo_propiedad->id}}">{{$tipo_propiedad->nombre_tipo_propiedad}}</option>--}}
-{{--                                    @endforeach--}}
+                                    @foreach($tiposPropiedad as $tipo_propiedad)
+                                        <option value="{{$tipo_propiedad->id}}">{{$tipo_propiedad->nombre_tipo_propiedad}}</option>
+                                    @endforeach
                                 </select>
 
                                 @error('tipo_propiedad')
@@ -61,20 +61,20 @@
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input class="multisteps-form__input form-control" type="text" placeholder="Calle"/>
+                                    <input class="form-control" name="calle" type="text" placeholder="Calle" value="{{old('calle')}}">
                                 </div>
                             </div>
 
                             <div class="form-row mt-4 shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input class="multisteps-form__input form-control" type="text" placeholder="Altura"/>
+                                    <input class="form-control" name="altura" type="number" placeholder="Altura" value="{{old('altura')}}">
                                 </div>
                             </div>
 
 
                             <div class="form-row mt-4 shadow-none p-3 mb-5 bg-light rounded">
                                 <select class="multisteps-form__select form-control" name="provincia">
-                                    <option selected="selected">Seleccione la provincia</option>
+                                    <option selected="selected" name="provincia">Seleccione la provincia</option>
                                     @foreach($provincias as $provincia)
                                         <option value="{{$provincia->id}}">{{$provincia->nombre_provincia}}</option>
                                     @endforeach
@@ -82,8 +82,11 @@
                             </div>
 
                             <div class="form-row mt-4 shadow-none p-3 mb-5 bg-light rounded">
-                                <select class="multisteps-form__select form-control" name="provincia">
-                                    <option selected="selected">Seleccione la ciudad</option>
+                                <select class="multisteps-form__select form-control" name="ciudad">
+                                    <option selected="selected" name="ciudad">Seleccione la localidad</option>
+                                    @foreach($ciudades as $ciudade)
+                                        <option value="{{$ciudade->id}}">{{$ciudade->nombre_ciudad}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -106,44 +109,44 @@
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="number" class="form-control" placeholder="Ambientes"/>
+                                    <input class="form-control" name="ambientes" type="number" placeholder="Ambientes" value="{{old('ambientes')}}">
                                 </div>
                             </div>
 
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="number" class="form-control" placeholder="Dormitorios"/>
+                                    <input class="form-control" name="dormitorios" type="number" placeholder="Dormitorios" value="{{old('dormitorios')}}">
                                 </div>
                             </div>
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="number" class="form-control" placeholder="Baños"/>
+                                    <input class="form-control" name="baños" type="number" placeholder="Baños" value="{{old('baños')}}">
                                 </div>
                             </div>
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="number" class="form-control" placeholder="Cochera"/>
+                                    <input class="form-control" name="cocheras" type="number" placeholder="Cocheras" value="{{old('cocheras')}}">
                                 </div>
                             </div>
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="number" class="form-control" placeholder="Superficie cubierta"/>
+                                    <input class="form-control" name="cubierta" type="number" placeholder="Superficie cubierta" value="{{old('cubierta')}}">
                                 </div>
                             </div>
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="number" class="form-control" placeholder="Superficie total"/>
+                                    <input class="form-control" name="total_terreno" type="number" placeholder="Superficie total del terreno" value="{{old('total_terreno')}}">
                                 </div>
                             </div>
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="number" class="form-control" placeholder="Precio"/>
+                                    <input class="form-control" name="precio" type="number" placeholder="Precio" value="{{old('precio')}}">
                                 </div>
                             </div>
 

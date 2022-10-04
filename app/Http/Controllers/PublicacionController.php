@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ciudad;
 use App\Models\Provincia;
 use App\Models\Publicacion;
+use App\Models\TipoPropiedad;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PublicacionController extends Controller
 {
@@ -29,11 +33,19 @@ class PublicacionController extends Controller
         return view('publicaciones.show',['publicacion'=> $publicacion]);
     }
 
-    public function create(Provincia $provincia)
+    public function create(Provincia $provincia, TipoPropiedad $tipoPropiedad, Ciudad $ciudad)
     {
         $provincias = Provincia::get();
-        return view('publicaciones.create',['provincias'=> $provincias]);
+        $tiposPropiedad = TipoPropiedad::get();
+        $ciudades = Ciudad::get();
+
+        return view('publicaciones.create', compact('provincias', 'tiposPropiedad', 'ciudades'));
     }
+
+//    {
+//        $provincias = Provincia::get();
+//        return view('publicaciones.create',['provincias'=> $provincias]);
+//    }
 
     public function store(Request $request, Provincia $provincia)
     {
@@ -52,6 +64,9 @@ class PublicacionController extends Controller
         //Falta Ubicacion
 
         //Pagina 3 del formulario
+        $publicacion->calle_publicacion = $request->input('calle');
+        $publicacion->estado_publicacion = "Activo";
+        $publicacion->altura_publicacion = $request->input('altura');
         $publicacion->ambientes_publicacion = $request->input('ambientes');
         $publicacion->dormitorios_publicacion = $request->input('dormitorios');
         $publicacion->banios_publicacion = $request->input('baños');
@@ -61,6 +76,11 @@ class PublicacionController extends Controller
         $publicacion->precio_publicacion = $request->input('precio');
         $publicacion->titulo_publicacion = $request->input('titulo');
         $publicacion->descripcion_publicacion = $request->input('descripcion');
+        $publicacion->id_tipo_propiedad = $request->input('tipo_propiedad');
+        $publicacion->id_provincia = $request->input('provincia');
+        $publicacion->id_ciudad = $request->input('ciudad');
+//        obtener el usuario logueado
+        $publicacion->id_usuario = auth()->user()-> getAuthIdentifier();
         //Pagina 4 del formulario
         //Falta imagen
 
