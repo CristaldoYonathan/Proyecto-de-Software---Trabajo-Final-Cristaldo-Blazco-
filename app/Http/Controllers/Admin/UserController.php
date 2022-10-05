@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDFS;
 
 class UserController extends Controller
 {
@@ -16,6 +18,17 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.users.index');
+    }
+
+    public function pdf(User $users)
+//    {
+//        $pdf = \PDF::loadView('admin.users.pdf', compact('users'));
+//        return $pdf->download('users.pdf');
+//    }
+    {
+        $users = User::all();
+        $pdf = PDFS\Pdf::loadView('admin.users.pdfmostrar', ['users'=>$users]);
+        return $pdf->stream();
     }
 
     /**

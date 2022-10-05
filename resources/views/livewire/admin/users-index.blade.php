@@ -6,10 +6,13 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <input wire:model="search" class="form-control" placeholder="Ingrese nombre de usuario o email para buscar">
+                    <input wire:model="searchTerm" class="form-control" placeholder="Ingrese nombre de usuario o email para buscar">
 {{--                    input con button para buscar--}}
 {{--                    <input type="text" class="form-control" wire:model="search">--}}
 {{--                    <button class="btn btn-primary" wire:click="search">Buscar</button>--}}
+                </div>
+                <div>
+                    <a href="{{route('admin.users.pdf')}}" class="btn btn-primary">Generar PDF</a>
                 </div>
             </div>
         </div>

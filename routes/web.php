@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicacionController;
 
@@ -37,10 +38,12 @@ Route::view('/alquileres','alquileres')->name('alquileres');
 //Ruta about
 Route::view('/about','about')->name('about');
 
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Ruta para creacion de PDF
+Route::get('admin/users/pdf', [UserController::class, 'pdf'])->name('admin.users.pdf');
 
 Route::middleware([
     'auth:sanctum',
