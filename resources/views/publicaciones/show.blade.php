@@ -1,4 +1,4 @@
-<x-app-layouts>
+<x-app-layout>
 
 <h1>{{$publicacion->titulo_publicacion}}</h1>
     <h3>{{$publicacion->precio_publicacion}}</h3>
@@ -73,4 +73,4 @@
 
 <a href="{{route('publicaciones.index')}}">Regresar</a>
 
-</x-app-layouts>
+</x-app-layout>

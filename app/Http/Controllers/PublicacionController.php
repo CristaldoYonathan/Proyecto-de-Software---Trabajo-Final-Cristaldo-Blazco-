@@ -94,10 +94,17 @@ class PublicacionController extends Controller
         return to_route('publicaciones.index');
     }
 
-    public function edit(Publicacion $publicacion)
+    public function edit(Publicacion $publicacion, Provincia $provincia, TipoPropiedad $tipoPropiedad, Ciudad $ciudad)
     {
-        return view('publicaciones.edit',['publicacion'=> $publicacion]);
+        $provincias = Provincia::get();
+        $tiposPropiedad = TipoPropiedad::get();
+        $ciudades = Ciudad::get();
+
+        return view('publicaciones.edit', compact('publicacion', 'provincias', 'tiposPropiedad', 'ciudades'));
     }
+
+
+
 
     public function update(Request $request, Publicacion $publicacion)
     {
@@ -117,6 +124,7 @@ class PublicacionController extends Controller
 
         //Pagina 3 del formulario
         $publicacion->ambientes_publicacion = $request->input('ambientes');
+        $publicacion->calle_publicacion = $request->input('calle');
         $publicacion->dormitorios_publicacion = $request->input('dormitorios');
         $publicacion->banios_publicacion = $request->input('baños');
         $publicacion->cochera_publicacion = $request->input('cocheras');
@@ -125,6 +133,9 @@ class PublicacionController extends Controller
         $publicacion->precio_publicacion = $request->input('precio');
         $publicacion->titulo_publicacion = $request->input('titulo');
         $publicacion->descripcion_publicacion = $request->input('descripcion');
+        $publicacion->id_tipo_propiedad = $request->input('tipo_propiedad');
+
+//        $publicacion->id_provincia = $request->input('provincia');
         //Pagina 4 del formulario
         //Falta imagen
 
@@ -136,7 +147,7 @@ class PublicacionController extends Controller
         session()->flash('estado_publicacion','Se modifico de manera exitosa la Publicacion');
 
         //return to_route('publicaciones.index');
-        return to_route('publicaciones.show',$publicacion);
+        return to_route('publicaciones.index',$publicacion);
     }
 
     public function destroy(Request $request, Publicacion $publicacion)
