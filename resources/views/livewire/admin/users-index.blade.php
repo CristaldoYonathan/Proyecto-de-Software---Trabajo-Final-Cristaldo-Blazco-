@@ -1,12 +1,11 @@
 <div>
     <div class="card">
 {{--        Ingrese nombre de usuario o email para buscar--}}
-        {{$search}}
 
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                    <input wire:model="searchTerm" class="form-control" placeholder="Ingrese nombre de usuario o email para buscar">
+                    <input wire:model="search" class="form-control" placeholder="Ingrese nombre de usuario o email para buscar">
 {{--                    input con button para buscar--}}
 {{--                    <input type="text" class="form-control" wire:model="search">--}}
 {{--                    <button class="btn btn-primary" wire:click="search">Buscar</button>--}}
@@ -43,20 +42,10 @@
             </table>
         </div>
 {{--        links de paginacion--}}
-{{--        <div class="card-footer">--}}
-{{--            {{ $users->links() }}--}}
-{{--        </div>--}}
+        <div class="card-footer">
+            {{ $users->links() }}
+        </div>
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-                <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
-                <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
-
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
         @else
             <div class="card-body">
                 <strong>No hay registros</strong>
@@ -64,3 +53,5 @@
         @endif
     </div>
 </div>
+
+@livewireScripts

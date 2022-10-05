@@ -10,3 +10,9 @@
     @livewire('admin.users-index')
 {{--    @livewire('admin.users-index')--}}
 @stop
+
+{{--@section('js')--}}
+{{--    @livewireScripts--}}
+{{--@stop--}}
+
+
