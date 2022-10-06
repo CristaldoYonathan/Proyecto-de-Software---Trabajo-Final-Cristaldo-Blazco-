@@ -19,51 +19,6 @@ class RoleSeeder extends Seeder
     public function run()
     {
 
-//        DB::table('permissions')->insert([
-//            'name' => 'create',
-//            'guard_name' => 'web',
-//            'description' => 'Create a new record',
-//        ],
-//        [
-//            'name' => 'read',
-//            'guard_name' => 'web',
-//            'description' => 'Read a record',
-//        ],
-//        [
-//            'name' => 'update',
-//            'guard_name' => 'web',
-//            'description' => 'Update a record',
-//        ],
-//        [
-//            'name' => 'delete',
-//            'guard_name' => 'web',
-//            'description' => 'Delete a record',
-//        ],
-//        [
-//            'name' => 'restore',
-//            'guard_name' => 'web',
-//            'description' => 'Restore a record',
-//        ],
-//        [
-//            'name' => 'forceDelete',
-//            'guard_name' => 'web',
-//            'description' => 'Force delete a record',
-//        ]);
-//
-//
-//        DB::table('roles')->insert([
-//            'name' => 'Admin',
-//            'guard_name' => 'web',
-//            'description' => 'Admin',
-//        ],
-//        [
-//            'name' => 'User',
-//            'guard_name' => 'web',
-//            'description' => 'User',
-//        ]);
-
-
-
 
 //        En esta seccion se crean 4 roles: admin, inquilino, propietario e invitado y se le asigna una variabla a cada uno de ellos
         $admin = Role::create(['name' => 'admin']);
@@ -90,5 +45,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.properties.edit', 'description' => 'Editar propiedades'])->syncRoles([$admin, $propietario]);
         Permission::create(['name' => 'admin.properties.destroy', 'description' => 'Eliminar propiedades'])->syncRoles([$admin, $propietario]);
 
+//        asignar a todos los usuarios el rol de invitado
+        $users = \App\Models\User::all();
+        foreach ($users as $user) {
+            $user->assignRole('invitado');
+        }
     }
 }

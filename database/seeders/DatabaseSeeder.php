@@ -25,8 +25,10 @@ use Illuminate\Database\Seeder;
 //
 //        llamar a todos los seeders
 $this->call([
-    RoleSeeder::class,
     UserSeeder::class,
+    RoleSeeder::class,
 ]);
+
+
     }
 }

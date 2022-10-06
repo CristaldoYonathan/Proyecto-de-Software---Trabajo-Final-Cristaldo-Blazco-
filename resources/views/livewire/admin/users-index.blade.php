@@ -6,15 +6,25 @@
             <div class="row">
                 <div class="col-md-6">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre de usuario o email para buscar">
-{{--                    input con button para buscar--}}
-{{--                    <input type="text" class="form-control" wire:model="search">--}}
-{{--                    <button class="btn btn-primary" wire:click="search">Buscar</button>--}}
                 </div>
                 <div>
                     <a href="{{route('admin.users.pdf')}}" class="btn btn-primary">Generar PDF</a>
                 </div>
             </div>
         </div>
+
+{{--        filtrar por roles--}}
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <select wire:model="role_id" class="form-control">
+                        <option value="" selected>Todos los roles</option>
+                        @foreach($roles as $role)
+                            <option value="{{$role->id}}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
         @if($users->count())
         <div class="card-body">
@@ -24,6 +34,7 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Rol</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -33,6 +44,7 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td class="text-success">{{ $user->roles->pluck('name')->implode(', ') }}</td>
                             <td width="10px">
                                 <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-primary">Edit</a>
                             </td>
