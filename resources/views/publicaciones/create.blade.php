@@ -35,7 +35,7 @@
                                 <select class="multisteps-form__select form-control" name="tipo_propiedad">
                                     <option selected="selected">Seleccione el tipo de propiedad</option>
                                     @foreach($tiposPropiedad as $tipo_propiedad)
-                                        <option value="{{$tipo_propiedad->id}}">{{$tipo_propiedad->nombre_tipo_propiedad}}</option>
+                                        <option value="{{$tipo_propiedad->id}}" @if(old('tipo_propiedad') == $tipo_propiedad->id) selected @endif>{{$tipo_propiedad->nombre_tipo_propiedad}}</option>
                                     @endforeach
                                 </select>
 
@@ -73,10 +73,14 @@
 
 
                             <div class="form-row mt-4 shadow-none p-3 mb-5 bg-light rounded">
-                                <select class="multisteps-form__select form-control" name="provincia">
+                                <select class="multisteps-form__select form-control" name="provincia" >
                                     <option selected="selected" name="provincia">Seleccione la provincia</option>
                                     @foreach($provincias as $provincia)
-                                        <option value="{{$provincia->id}}">{{$provincia->nombre_provincia}}</option>
+                                        <option value="{{$provincia->id}}"
+                                                @if(old('provincia') == $provincia->id)
+                                                    selected
+                                                @endif
+                                        >{{$provincia->nombre_provincia}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -85,7 +89,11 @@
                                 <select class="multisteps-form__select form-control" name="ciudad">
                                     <option selected="selected" name="ciudad">Seleccione la localidad</option>
                                     @foreach($ciudades as $ciudade)
-                                        <option value="{{$ciudade->id}}">{{$ciudade->nombre_ciudad}}</option>
+                                        <option value="{{$ciudade->id}}"
+                                                @if(old('ciudad') == $ciudade->id)
+                                                    selected
+                                                @endif
+                                        >{{$ciudade->nombre_ciudad}}</option>
                                     @endforeach
                                 </select>
                             </div>
