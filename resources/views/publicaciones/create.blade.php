@@ -226,157 +226,24 @@
 
                     </div>
 
-
-
-
-
-
-
                     <!--single form panel-->
                     <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                         <h3 class="multisteps-form__title">Comodidades</h3>
                         <div class="multisteps-form__content">
 
-                            <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
-                                <h6 class="p-2" >Caracteristicas especificas</h6>
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Acceso para personas con discapacidad</label>
+                            @foreach($comodidades as $comodidad)
+                                <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
+                                    <h6 class="p-2" >{{$comodidad->nombre_comodidad}}</h6>
+                                    @foreach($caracteristicasComodidades->where('id_comodidad',$comodidad->id) as $caracteristica)
+                                        <div class="col form-check-inline">
+                                            <input type="checkbox" name="caracteristicas[]" value="{{$caracteristica->id}}" id="{{$caracteristica->id}}" class="form-check-input ">
+                                            <label for="{{$caracteristica->id}}">{{$caracteristica->nombre_caracteristica_comodidad}}</label>
+                                        </div>
+                                    @endforeach
                                 </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Permiten mascotas</label>
-                                </div>
-
-                            </div>
-
-                            <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
-                                <h6 class="p-2" >Caracteristicas</h6>
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input ">
-                                    <label class="form-check-label" for="exampleCheck1">Aire acondicionado</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input ">
-                                    <label class="form-check-label" for="exampleCheck1">Amoblado</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input ">
-                                    <label class="form-check-label" for="exampleCheck1">Calefaccion</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input ">
-                                    <label class="form-check-label" for="exampleCheck1">Cocina equipada</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Lavarropas</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Termotanque</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Vigilancia</label>
-                                </div>
-
-                            </div>
-
-                            <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
-                                <h6 class="p-2">Servicios</h6>
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Ascensor</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Internet/Wifi</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Lavanderia</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input ">
-                                    <label class="form-check-label" for="exampleCheck1">Servicio de limpieza</label>
-                                </div>
-
-                            </div>
-
-                            <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
-                                <h6 class="p-2">Ambientes</h6>
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Balcon</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Cocina</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Comedor</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Hall</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Jardin</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Lavadero</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Living</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Living comedor</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Patio</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Sotano</label>
-                                </div>
-
-                                <div class="col form-check-inline">
-                                    <input type="checkbox" class="form-check-input " >
-                                    <label class="form-check-label" for="exampleCheck1">Terraza</label>
-                                </div>
-
-                            </div>
+                            @endforeach
 
                         </div>
-
-
-
                         <div class="button-row d-flex mt-4 " >
                             <div class="col">
                                 <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Anterior</button>

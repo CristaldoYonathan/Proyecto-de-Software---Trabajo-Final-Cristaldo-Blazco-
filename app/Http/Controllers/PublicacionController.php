@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CaracteristicaComodidad;
 use App\Models\Ciudad;
+use App\Models\Comodidad;
 use App\Models\Provincia;
 use App\Models\Publicacion;
 use App\Models\TipoPropiedad;
@@ -33,13 +35,15 @@ class PublicacionController extends Controller
         return view('publicaciones.show',['publicacion'=> $publicacion]);
     }
 
-    public function create(Provincia $provincia, TipoPropiedad $tipoPropiedad, Ciudad $ciudad)
+    public function create(Provincia $provincia, TipoPropiedad $tipoPropiedad, Ciudad $ciudad, Comodidad $comodidad, CaracteristicaComodidad $caracteristicaComodidad)
     {
         $provincias = Provincia::get();
         $tiposPropiedad = TipoPropiedad::get();
         $ciudades = Ciudad::get();
+        $comodidades = Comodidad::get();
+        $caracteristicasComodidades = CaracteristicaComodidad::get();
 
-        return view('publicaciones.create', compact('provincias', 'tiposPropiedad', 'ciudades'));
+        return view('publicaciones.create', compact('provincias', 'tiposPropiedad', 'ciudades', 'comodidades', 'caracteristicasComodidades'));
     }
 
 //    {
