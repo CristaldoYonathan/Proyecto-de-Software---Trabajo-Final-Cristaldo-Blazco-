@@ -105,4 +105,10 @@ class Publicacion extends Model
 	{
 		return $this->belongsTo(User::class, 'id_usuario');
 	}
+
+//    muchos a muchos con CaraacteristicaComodidad
+    public function caracteristica_comodidades()
+    {
+        return $this->belongsToMany(CaracteristicaComodidad::class, 'caracteristica_comodidad_publicacion', 'id_publicacion', 'id_caracteristica_comodidad');
+    }
 }

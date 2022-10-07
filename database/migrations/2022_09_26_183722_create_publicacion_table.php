@@ -61,6 +61,29 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        //crear tabla comodidades
+        Schema::create('comodidad', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre_comodidad');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        //crear tabla caracteristica_comodidad sin clave foranea
+        Schema::create('caracteristica_comodidad', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre_caracteristica_comodidad');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+//        una comodidad pertenece a muchas caracteristica_comodidad
+        Schema::table('caracteristica_comodidad', function (Blueprint $table) {
+            $table->foreignId('id_comodidad')->constrained('comodidad');
+        });
+
+
         //crear clave foreanea de tipo de propiedad
         Schema::table('publicacion', function (Blueprint $table) {
             $table->foreignId('id_tipo_propiedad')->constrained('tipo_propiedad');
@@ -73,6 +96,23 @@ return new class extends Migration
         Schema::table('publicacion', function (Blueprint $table) {
             $table->foreignId('id_ciudad')->constrained('ciudad');
         });
+
+        Schema::create('caracteristica_comodidad_publicacion', function (Blueprint $table) {
+            $table->id();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+//        una publicacion tiene muchas caracteristica_comodidad_publicacion
+        Schema::table('caracteristica_comodidad_publicacion', function (Blueprint $table) {
+            $table->foreignId('id_publicacion')->constrained('publicacion');
+        });
+
+//        una caracteristica_comodidad tiene muchas caracteristica_comodidad_publicacion
+        Schema::table('caracteristica_comodidad_publicacion', function (Blueprint $table) {
+            $table->foreignId('id_caracteristica')->constrained('caracteristica_comodidad');
+        });
+
     }
 
     /**
