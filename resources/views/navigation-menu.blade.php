@@ -3,11 +3,12 @@
     <!-- En esta sección se pueden agregar los items nuevos para la navbar -->
     @php($navlinks = [
         ['href' => '/dashboard' , 'name' => 'Inicio','text' => 'dashboard' ],
-        ['href' => '/registroPropiedad', 'name' => 'Publicar', 'text' => 'publicaciones.index'],
+        ['href' => '/registroPropiedad/create', 'name' => 'Publicar', 'text' => 'publicaciones.create'],
         ['href' => '/alquileres', 'name' => 'Alquilar', 'text' => 'alquileres'],
         ['href' => '/about', 'name' => 'Contactanos', 'text' => 'about'],
         ['href' => '/admin', 'name' => 'Admin', 'text' => 'admin'],
         ['href' => '/publicaciones/borradores/borrado', 'name' => 'Publicaciones Desactivadas', 'text' => 'publicaciones.borradoUsuario'],
+        ['href' => '/registroPropiedad', 'name' => 'Publicaciones Activas', 'text' => 'publicaciones.index'],
     ])
 
     <!-- Primary Navigation Menu -->

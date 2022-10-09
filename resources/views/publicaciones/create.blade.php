@@ -7,6 +7,7 @@
 
 
     <body>
+    <h1>Fomrulario para registro de una propiedad</h1>
     <div class="multisteps-form">
         <!--progress bar-->
         <div class="row mt-5">
