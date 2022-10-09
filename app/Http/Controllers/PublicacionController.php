@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\CaracteristicaComodidad;
 use App\Models\Ciudad;
 use App\Models\Comodidad;
+use App\Models\Imagen;
 use App\Models\Provincia;
 use App\Models\Publicacion;
 use App\Models\TipoPropiedad;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class PublicacionController extends Controller
@@ -23,9 +24,10 @@ class PublicacionController extends Controller
      */
     public function index()
     {
-        $publicaciones = Publicacion::get();
+        $publicaciones = Publicacion::get()->where('id_usuario',Auth::user()->id);
+        $tipoPropiedad = TipoPropiedad::get()->where('tipo_propiedad',TipoPropiedad::with('publicacion')->get());
 
-        return view('publicaciones.index',['publicaciones'=> $publicaciones]);
+        return view('publicaciones.index',['publicaciones'=> $publicaciones , 'tipoPropiedad' => $tipoPropiedad]);
     }
 
     public function show(Publicacion $publicacion)
@@ -55,19 +57,13 @@ class PublicacionController extends Controller
     {
         $request->validate([
             'titulo'=>['required'],
-            'descripcion'=>['required']
+            'descripcion'=>['required'],
+            'file'=>['image'],  //| mimes:jpeg,png,jpg,gif,svg
         ]);
-        $publicacion = new Publicacion;
-        //Pagina 1 del formulario
-        //$publicacion->titulo_publicacion = $request->input('tipo_propiedad');
-        //$publicacion->subtipo_propiedad = $request->input('subtipo_propiedad');
-        //Pagina 2 del formulario
-        //$publicacion->direccion_propiedad = $request->input('direccion');
-//        $publicacion->provincia_propiedad = $request->input('provincia');
-        //$publicacion->ciudad_propiedad = $request->input('ciudad');
-        //Falta Ubicacion
 
-        //Pagina 3 del formulario
+        $publicacion = new Publicacion;
+        $imageness = new Imagen;
+
         $publicacion->calle_publicacion = $request->input('calle');
         $publicacion->estado_publicacion = "Activo";
         $publicacion->altura_publicacion = $request->input('altura');
@@ -85,13 +81,30 @@ class PublicacionController extends Controller
         $publicacion->id_ciudad = $request->input('ciudad');
 //        obtener el usuario logueado
         $publicacion->id_usuario = auth()->user()-> getAuthIdentifier();
-        //Pagina 4 del formulario
-        //Falta imagen
+        //Se obtiene la imagen
+        $imagenes = $request->file('file')->store('public/imagenes');
+        $imagenes1 = $request->file('file1')->store('public/imagenes');
+        $imagenes2 = $request->file('file2')->store('public/imagenes');
+        $imagenes3 = $request->file('file3')->store('public/imagenes');
+        $imagenes4 = $request->file('file4')->store('public/imagenes');
 
-        //Pagina 5 del formulario
-        //Falta los checkboxs
+        $url = Storage::url($imagenes);
+        $url1 = Storage::url($imagenes1);
+        $url2 = Storage::url($imagenes2);
+        $url3 = Storage::url($imagenes3);
+        $url4 = Storage::url($imagenes4);
+
+        $imageness->url_imagen = $url;
+        $imageness->url_imagen = $url1;
+        $imageness->url_imagen = $url2;
+        $imageness->url_imagen = $url3;
+        $imageness->url_imagen = $url4;
+
 
         $publicacion->save();
+        //Se guarda la imagen despues que se creo la publicacion
+        $imageness->id_publicacion = $publicacion->id;
+        $imageness->save();
 
         session()->flash('estado_publicacion','Se publico de manera exitosa la Propiedad');
 

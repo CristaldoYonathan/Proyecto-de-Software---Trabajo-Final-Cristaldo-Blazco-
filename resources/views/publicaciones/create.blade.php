@@ -2,7 +2,9 @@
 
     <x-slot name="title">Publicar una propiedad</x-slot>
 
-    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css'])
+    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css', ])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css" integrity="sha512-7uSoC3grlnRktCWoO4LjHMjotq8gf9XDFQerPuaph+cqR7JC9XKGdvN+UwZMC14aAaBDItdRj3DcSDs4kMWUgg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <body>
     <div class="multisteps-form">
@@ -21,7 +23,7 @@
         <!--form panels-->
         <div class="row">
             <div class="col-12 col-lg-8 m-auto">
-                <form class="multisteps-form__form" action="{{route('publicaciones.store')}}" method="POST">
+                <form class="multisteps-form__form" action="{{route('publicaciones.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <!--PANEL TIPO DE PROPIEDAD-->
@@ -196,22 +198,51 @@
 
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="file" placeholder="Imagen"/>
+                                    <input name="file" type="file" accept="image/*" value="{{old('imagen')}}">
+                                    @error('file')
+                                        <small style="color:red">{{$message}}</small>
+                                    @enderror
                                 </div>
                             </div>
-
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="file" placeholder="Imagen"/>
+                                    <input name="file1" type="file" accept="image/*" value="{{old('imagen')}}">
+                                    @error('file')
+                                    <small style="color:red">{{$message}}</small>
+                                    @enderror
                                 </div>
                             </div>
-
                             <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                 <div class="col">
-                                    <input type="file" placeholder="Imagen"/>
+                                    <input name="file2" type="file" accept="image/*" value="{{old('imagen')}}">
+                                    @error('file')
+                                    <small style="color:red">{{$message}}</small>
+                                    @enderror
                                 </div>
                             </div>
-
+                            <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
+                                <div class="col">
+                                    <input name="file3" type="file" accept="image/*" value="{{old('imagen')}}">
+                                    @error('file')
+                                    <small style="color:red">{{$message}}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
+                                <div class="col">
+                                    <input name="file4" type="file" accept="image/*" value="{{old('imagen')}}">
+                                    @error('file')
+                                    <small style="color:red">{{$message}}</small>
+                                    @enderror
+                                </div>
+                            </div>
+{{--                            <Label>Imegenes de la propiedad</Label>--}}
+{{--                            <div action="/file-upload"--}}
+{{--                                 name="file"--}}
+{{--                                 class="dropzone"--}}
+{{--                                 style="background: #f5f5f5; border: 2px dashed rgba(215,83,105,0.54); border-radius: 5px; min-height: 150px; padding: 20px 54px;"--}}
+{{--                                 id="my-awesome-dropzone">--}}
+{{--                            </div>--}}
 
                         </div>
 
@@ -254,12 +285,35 @@
                         </div>
 
                     </div>
-
-
                 </form>
             </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+
+    <script>
+        Dropzone.options.myAwesomeDropzone = {
+            paramName: "file", // The name that will be used to transfer the file
+            headers:{
+                'X-CSRF-TOKEN' : "{{csrf_token()}}"
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            //agregar token csrf dropzone
+            init: function() {
+                this.on("sending", function(file, xhr, formData) {
+                    formData.append("_token", "{{ csrf_token() }}");
+                });
+            },
+            dictDefaultMessage: "Puede arrastrar hasta 5 imagenes aqui para subirlas en su publicacion",
+            aceptedFiles: "image/*",
+            maxFilesize: 2, // MB
+            maxFiles: 5,
+        };
+    </script>
+
     </body>
 
 

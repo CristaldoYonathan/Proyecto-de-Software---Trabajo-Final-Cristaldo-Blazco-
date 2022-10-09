@@ -24,9 +24,9 @@ return new class extends Migration
             $table->integer('cochera_publicacion');
             $table->integer('ambientes_publicacion');
             $table->double('superficie_cubierta_casa');
-            $table->string('imagen_uno_publicacion');
-            $table->string('imagen_dos_publicacion');
-            $table->string('imagen_tres_publicacion');
+//            $table->string('imagen_uno_publicacion');
+//            $table->string('imagen_dos_publicacion');
+//            $table->string('imagen_tres_publicacion');
             $table->double('superficie_total_terreno');
             $table->double('precio_publicacion');
             $table->string('titulo_publicacion');
@@ -68,6 +68,24 @@ return new class extends Migration
             $table->string('nombre_comodidad');
             $table->softDeletes();
             $table->timestamps();
+        });
+
+        //crear tabla imagenes sin clave foranea
+        Schema::create('imagen', function (Blueprint $table) {
+            $table->id();
+            $table->string('url_imagen');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        //una publicacion tiene muchas imagenes (No es necesaria almenos que queramos hacer una relacion de doble sentido)
+//        Schema::table('publicacion', function (Blueprint $table) {
+//            $table->foreignId('id_imagen')->constrained('imagen');
+//        });
+
+        //una imagen es para una publicacion
+        Schema::table('imagen', function (Blueprint $table) {
+            $table->foreignId('id_publicacion')->constrained('publicacion');
         });
 
         //crear tabla caracteristica_comodidad sin clave foranea

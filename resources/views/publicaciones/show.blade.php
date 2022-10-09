@@ -1,5 +1,7 @@
 <x-app-layout>
 
+    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css', ])
+
 <h1>{{$publicacion->titulo_publicacion}}</h1>
     <h3>{{$publicacion->precio_publicacion}}</h3>
 

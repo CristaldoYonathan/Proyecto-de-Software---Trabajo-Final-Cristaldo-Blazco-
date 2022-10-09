@@ -111,4 +111,10 @@ class Publicacion extends Model
     {
         return $this->belongsToMany(CaracteristicaComodidad::class, 'caracteristica_comodidad_publicacion', 'id_publicacion', 'id_caracteristica_comodidad');
     }
+
+    //uno a muchos imagen
+    public function Image()
+    {
+        return $this->hasMany(Imagen::class, 'id_publicacion');
+    }
 }
