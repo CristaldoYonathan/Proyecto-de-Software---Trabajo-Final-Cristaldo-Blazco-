@@ -1,4 +1,4 @@
-<x-app-layout >
+<x-app-layout>
     <x-slot name="title">Inicio</x-slot>
 
     @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css', 'resources/css/nucleo-svg.css',  'resources/css/nucleo-icons.css'])

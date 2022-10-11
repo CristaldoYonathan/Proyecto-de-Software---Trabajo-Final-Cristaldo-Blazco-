@@ -1,4 +1,5 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 border-radius-xl top-0 z-index-fixed shadow fixed-top my-3 py-2 start-5 end-5">
 
     <!-- En esta sección se pueden agregar los items nuevos para la navbar -->
     @php($navlinks = [

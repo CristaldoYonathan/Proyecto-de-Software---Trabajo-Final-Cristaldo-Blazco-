@@ -1,3 +1,4 @@
-{{--<x-layouts.app titulo="Alquileres">--}}
+{{--importar la navbar de jetstream--}}
+<x-app-layout>
     <h1>Alquileres</h1>
-{{--</x-layouts.app>--}}
+</x-app-layout>
