@@ -1,8 +1,9 @@
 <x-app-layout>
     <x-slot name="title">Inicio</x-slot>
 
-    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css', 'resources/css/nucleo-svg.css',  'resources/css/nucleo-icons.css'])
-        <!-- Font Awesome Icons -->
+    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css','resources/js/material-kit.js' ])
+
+    <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">

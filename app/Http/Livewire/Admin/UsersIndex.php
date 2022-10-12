@@ -13,6 +13,7 @@ class UsersIndex extends Component
 
     public $search ;
     public $role_id;
+    public $cant = '10';
 
     public function mount()
     {
@@ -31,7 +32,7 @@ class UsersIndex extends Component
     {
         $users = User::where('name', 'LIKE', '%' . $this->search . '%')
             ->orWhere('email', 'LIKE', '%' . $this->search . '%')
-            ->paginate(10);
+            ->paginate($this->cant);
 
         if($this->role_id != ''){
             $users = User::role($this->role_id)->paginate(10);

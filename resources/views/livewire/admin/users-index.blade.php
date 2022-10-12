@@ -2,9 +2,9 @@
     <div class="card">
 {{--        Ingrese nombre de usuario o email para buscar--}}
 
-        <div class="card-header">
+        <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre de usuario o email para buscar">
                 </div>
                 <div>
@@ -15,8 +15,8 @@
 
 {{--        filtrar por roles--}}
         <div class="card-header">
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row ">
+                <div class="col-md-2">
                     <select wire:model="role_id" class="form-control">
                         <option value="" selected>Todos los roles</option>
                         @foreach($roles as $role)
@@ -24,6 +24,18 @@
                         @endforeach
                     </select>
                 </div>
+{{--                cambiar numero de paginacion y posicionar el elemento al final --}}
+
+                <span class="ml-5 mr-1 mt-2">Mostrar</span>
+                <div class="col-md-1 ">
+                    <select wire:model="cant" class="form-control">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+
             </div>
 
         @if($users->count())
