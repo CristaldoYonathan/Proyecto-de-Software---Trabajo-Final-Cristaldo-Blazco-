@@ -25,9 +25,9 @@ class PublicacionController extends Controller
     public function index()
     {
         $publicaciones = Publicacion::get()->where('id_usuario',Auth::user()->id);
-        $tipoPropiedad = TipoPropiedad::get()->where('tipo_propiedad',TipoPropiedad::with('publicacion')->get());
+        $tiposPropiedades = TipoPropiedad::get();
 
-        return view('publicaciones.index',['publicaciones'=> $publicaciones , 'tipoPropiedad' => $tipoPropiedad]);
+        return view('publicaciones.index',compact('publicaciones','tiposPropiedades'));
     }
 
     public function show(Publicacion $publicacion)
@@ -111,14 +111,23 @@ class PublicacionController extends Controller
         return to_route('publicaciones.index');
     }
 
-    public function edit(Publicacion $publicacion, Provincia $provincia, TipoPropiedad $tipoPropiedad, Ciudad $ciudad)
+    public function edit(Publicacion $publicacion, Provincia $provincia, TipoPropiedad $tipoPropiedad, Ciudad $ciudad, Comodidad $comodidad, CaracteristicaComodidad $caracteristicaComodidad)
     {
         $provincias = Provincia::get();
         $tiposPropiedad = TipoPropiedad::get();
         $ciudades = Ciudad::get();
+        $comodidades = Comodidad::get();
+        $caracteristicasComodidades = CaracteristicaComodidad::get();
 
-        return view('publicaciones.edit', compact('publicacion', 'provincias', 'tiposPropiedad', 'ciudades'));
+        return view('publicaciones.edit', compact('publicacion', 'provincias', 'tiposPropiedad', 'ciudades', 'comodidades', 'caracteristicasComodidades'));
     }
+//    {
+//        $provincias = Provincia::get();
+//        $tiposPropiedad = TipoPropiedad::get();
+//        $ciudades = Ciudad::get();
+//
+//        return view('publicaciones.edit', compact('publicacion', 'provincias', 'tiposPropiedad', 'ciudades'));
+//    }
 
 
 

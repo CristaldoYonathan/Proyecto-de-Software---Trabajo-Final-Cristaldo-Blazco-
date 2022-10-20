@@ -1,6 +1,7 @@
 <x-app-layout>
 
-    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css'])
+    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/nucleo-svg.css'])
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
     <x-slot name="title">Registrar Propiedad</x-slot>
 
@@ -46,11 +47,6 @@
                         </div>
 
 
-
-                        @foreach($publicaciones as $publicacion)
-
-
-
                             <div class="table-responsive">
                                 <table class="table align-items-center mb-0">
                                     <thead>
@@ -64,7 +60,11 @@
                                         <th></th>
                                     </tr>
                                     </thead>
+
                                     <tbody>
+
+                                    @foreach($publicaciones as $publicacion)
+
                                     <tr style="height:100px">
                                         <td>
                                             <div class="d-flex px-2 py-1">
@@ -72,15 +72,21 @@
                                                     <img src="img/rents/7.webp" class="avatar avatar-xl me-3" alt="logo">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h3 class="mb-0"><a href="{{route('publicaciones.show',$publicacion->id)}}">{{$publicacion->titulo_publicacion}}</a></h3>
+                                                    <h3 class="mb-0"><a href="{{route('publicaciones.show',$publicacion->id)}}" title="{{$publicacion->titulo_publicacion}}">{{substr($publicacion->titulo_publicacion,0,17)}}@if(strlen($publicacion->titulo_publicacion)>17)...@endif
+
+                                                        </a></h3>
                                                     <p class="text-xs text-secondary mb-0">$.{{$publicacion->precio_publicacion}}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="font-weight-bold mb-0">Ver como traer el tipo de propiedad
-                                                {{--{{$tipoPropiedad->nombre_tipo_propiedad}}--}}</p>
-                                            <p class="text-xs text-secondary mb-0">Alquiler(Ver que es esto ?)</p>
+
+                                            @foreach($tiposPropiedades as $tipo)
+                                                @if($tipo->id == $publicacion->id_tipo_propiedad)
+                                                    <p class="text-xs font-weight-bold mb-0">{{$tipo->nombre_tipo_propiedad}}</p>
+                                                @endif
+                                            @endforeach
+
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="badge bg-gradient-success">{{$publicacion->estado_publicacion}}</span>
@@ -93,18 +99,21 @@
                                         </td>
                                         <td class="align-middle">
 {{--                                            <a href="{{route('publicaciones.edit',$publicacion)}}:" class="fas fa-edit" data-toggle="tooltip" data-original-title="Editar"></a>--}}
-                                            <a href="{{route('publicaciones.edit',$publicacion)}}" style="color: #00bb00">Editar</a>
+                                            <a href="{{route('publicaciones.edit',$publicacion)}}" class="fas fa-edit" data-toggle="tooltip" title="Editar publicación"></a>
+
                                         </td>
                                         <td class="align-middle">
                                             <form action="{{route('publicaciones.destroy',$publicacion)}}" method="POST">
                                                 @csrf @method('DELETE')
-                                                <button type="submit" style="color: red">Desactivar Publicacion</button>
+                                                <button type="submit" class="fa fa-house-damage" data-toggle="tooltip" title="Desactivar publicación"></button>
+
                                             </form>
                                     </tr>
+                                    @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
-                        @endforeach
                     </div>
                 </div>
             </div>

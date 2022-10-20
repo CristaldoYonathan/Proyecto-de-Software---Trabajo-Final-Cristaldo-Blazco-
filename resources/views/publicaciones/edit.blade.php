@@ -3,9 +3,21 @@
 
     @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css'])
 
-    <h1>Modificar una propiedad publicada</h1>
+    <body>
 
-    <div class="multisteps-form">
+
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('https://www.byverdleds.com/blog/wp-content/uploads/2019/08/LedSalon.jpg');">
+    <span class="mask bg-gradient-dark opacity-5"></span>
+
+    <div class="container my-auto mt-9">
+        <div class="row">
+            <div class="col-lg-7 col-md-10">
+                <h1 class="text-white">Modificar su propiedad</h1>
+            </div>
+        </div>
+        <div class="card h-100 align-content-xxl-center mt-3">
+
+            <div class="multisteps-form">
         <!--progress bar-->
         <div class="row mt-5">
             <div class=" ml-auto mr-auto mb-4">
@@ -229,7 +241,37 @@
 
 
                     <!--single form panel-->
+
                     <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                        <h3 class="multisteps-form__title">Comodidades</h3>
+                        <div class="multisteps-form__content">
+
+                            @foreach($comodidades as $comodidad)
+                                <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
+                                    <h6 class="p-2" >{{$comodidad->nombre_comodidad}}</h6>
+                                    @foreach($caracteristicasComodidades->where('id_comodidad',$comodidad->id) as $caracteristica)
+                                        <div class="col form-check-inline">
+                                            <input type="checkbox" name="caracteristicas[]" value="{{$caracteristica->id}}" id="{{$caracteristica->id}}" class="form-check-input ">
+                                            <label for="{{$caracteristica->id}}">{{$caracteristica->nombre_caracteristica_comodidad}}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <div class="button-row d-flex mt-4 " >
+                            <div class="col">
+                                <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Anterior</button>
+                            </div>
+                            <div class="col text-md-end">
+                                <button class="btn btn-success ml-auto" type="submit" title="Send">Enviar</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+             <!--       <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
                         <h3 class="multisteps-form__title">Comodidades</h3>
                         <div class="multisteps-form__content">
 
@@ -383,14 +425,22 @@
                         </div>
 
                     </div>
-
+-->
 
                 </form>
             </div>
         </div>
     </div>
 
+            <a href="{{route('publicaciones.index')}}">Regresar</a>
 
+
+        </div>
+
+    </div>
+    </div>
+    </body>
+</x-app-layout>
 
 {{--    <input name="dormitorios" type="text" value="{{old('dormitorios',$publicacion->dormitorios_publicacion)}}">--}}
 
@@ -638,6 +688,4 @@
         </div>
     </form>--}}
 
-    <a href="{{route('publicaciones.index')}}">Regresar</a>
 
-</x-app-layout>
