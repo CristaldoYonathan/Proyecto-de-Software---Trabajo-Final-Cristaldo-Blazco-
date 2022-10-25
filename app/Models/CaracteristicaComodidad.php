@@ -10,25 +10,27 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * Class CaracteristicaComodidad
- * 
+ *
  * @property int $id
  * @property string $nombre_caracteristica_comodidad
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int $id_comodidad
- * 
+ *
  * @property Comodidad $comodidad
  * @property Collection|Publicacion[] $publicacions
  *
  * @package App\Models
  */
-class CaracteristicaComodidad extends Model
+class CaracteristicaComodidad extends Model implements Auditable
 {
 	use SoftDeletes;
+    use \OwenIt\Auditing\Auditable;
 	protected $table = 'caracteristica_comodidad';
 
 	protected $casts = [

@@ -335,6 +335,15 @@ return [
 //            'label'       => 4,
 //            'label_color' => 'success',
         ]
+        //boton para ingresar en los registros de Auditoria
+        ,
+        [
+            'text'        => 'Auditoria',
+            'url'         => 'admin/auditoria',
+            'icon'        => 'fas fa-fw fa-user-lock',
+//            'label'       => 4,
+//            'label_color' => 'success',
+        ],
 
 //        [
 //            'text'        => 'pages',

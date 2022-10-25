@@ -9,24 +9,26 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * Class Imagen
- * 
+ *
  * @property int $id
  * @property string $url_imagen
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int $id_publicacion
- * 
+ *
  * @property Publicacion $publicacion
  *
  * @package App\Models
  */
-class Imagen extends Model
+class Imagen extends Model implements Auditable
 {
 	use SoftDeletes;
+    use \OwenIt\Auditing\Auditable;
 	protected $table = 'imagen';
 
 	protected $casts = [

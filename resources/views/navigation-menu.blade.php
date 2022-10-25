@@ -3,13 +3,30 @@
 
     <!-- En esta sección se pueden agregar los items nuevos para la navbar -->
     @php($navlinks = [
+
+         //si el usuario tiene el rol de inquilino cambiar el nombre del link de Publicaciones Activas a Alquileres Obtenidos
+//        'href' => [
+//            'label' => Auth::user()->hasRole('inquilino') ? 'Alquileres Obtenidos' : 'Publicaciones Activas',
+//            'route' => 'publicaciones.index',
+//            'active' => request()->routeIs('publicaciones.index')],
+
         ['href' => '/dashboard' , 'name' => 'Inicio','text' => 'dashboard' ],
         ['href' => '/registroPropiedad/create', 'name' => 'Publicar', 'text' => 'publicaciones.create'],
         ['href' => '/alquileres', 'name' => 'Alquilar', 'text' => 'alquileres'],
+//        ['href' => '/perfil', 'name' => 'Perfil', 'text' => 'perfil'],
+//        ['href' => '/contacto', 'name' => 'Contacto', 'text' => 'contacto'],
+//        ['href' => '/faq', 'name' => 'FAQ', 'text' => 'faq'],
+//        ['href' => '/ayuda', 'name' => 'Ayuda', 'text' => 'ayuda'],
+//        ['href' => '/logout', 'name' => 'Salir', 'text' => 'logout'],
         ['href' => '/about', 'name' => 'Contactanos', 'text' => 'about'],
         ['href' => '/admin', 'name' => 'Admin', 'text' => 'admin'],
         ['href' => '/publicaciones/borradores/borrado', 'name' => 'Publicaciones Desactivadas', 'text' => 'publicaciones.borradoUsuario'],
         ['href' => '/registroPropiedad', 'name' => 'Publicaciones Activas', 'text' => 'publicaciones.index'],
+
+//            if(Auth::user()->hasRole('inquilino')){
+//                ['href' => '/registroPropiedad', 'name' => 'Alquileres Obtenidos', 'text' => 'publicaciones.index'];
+//            }else{
+//                ['href' => '/registroPropiedad', 'name' => 'Publicaciones Activas', 'text' => 'publicaciones.index'];]
     ])
 
     <!-- Primary Navigation Menu -->

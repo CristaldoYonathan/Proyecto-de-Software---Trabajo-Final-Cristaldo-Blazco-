@@ -64,23 +64,27 @@
                                     <tbody>
 
                                     @foreach($publicaciones as $publicacion)
-
                                     <tr style="height:100px">
                                         <td>
                                             <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="img/rents/7.webp" class="avatar avatar-xl me-3" alt="logo">
+                                                <div class="">
+                                                    <img src="
+                                                    @foreach($imagenes as $imagen)
+                                                    @if($imagen->id_publicacion == $publicacion->id)
+                                                        {{asset($imagen->url_imagen)}}
+                                                    @endif
+                                                    @endforeach"
+                                                    class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h3 class="mb-0"><a href="{{route('publicaciones.show',$publicacion->id)}}" title="{{$publicacion->titulo_publicacion}}">{{substr($publicacion->titulo_publicacion,0,17)}}@if(strlen($publicacion->titulo_publicacion)>17)...@endif
 
                                                         </a></h3>
-                                                    <p class="text-xs text-secondary mb-0">$.{{$publicacion->precio_publicacion}}</p>
+                                                    <p class="text-xs text-secondary mb-0">$ {{$publicacion->precio_publicacion}}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-
                                             @foreach($tiposPropiedades as $tipo)
                                                 @if($tipo->id == $publicacion->id_tipo_propiedad)
                                                     <p class="text-xs font-weight-bold mb-0">{{$tipo->nombre_tipo_propiedad}}</p>

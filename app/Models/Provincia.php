@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * Class Provincia
@@ -24,9 +25,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class Provincia extends Model
+class Provincia extends Model implements Auditable
 {
 	use SoftDeletes;
+    use \OwenIt\Auditing\Auditable;
 	protected $table = 'provincia';
 
 	protected $fillable = [

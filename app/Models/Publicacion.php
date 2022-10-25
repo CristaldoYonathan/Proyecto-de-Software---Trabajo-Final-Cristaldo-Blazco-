@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * Class Publicacion
@@ -44,9 +45,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class Publicacion extends Model
+class Publicacion extends Model implements Auditable
 {
 	use SoftDeletes;
+    use \OwenIt\Auditing\Auditable;
 	protected $table = 'publicacion';
 
 	protected $casts = [

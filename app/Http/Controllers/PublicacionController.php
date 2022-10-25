@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class PublicacionController extends Controller
 {
@@ -24,16 +25,47 @@ class PublicacionController extends Controller
      */
     public function index()
     {
-        $publicaciones = Publicacion::get()->where('id_usuario',Auth::user()->id);
-        $tiposPropiedades = TipoPropiedad::get();
+        //si el usuario tiene el rol de inquilino mostrar solo las publicaciones que esten alquiladas para ese usuario
+        if(Auth::user()->hasRole('inquilino')){
+            $publicaciones = Publicacion::where('estado_publicacion', 'Alquilado')->where('id_usuario', Auth::user()->id)->get();
+        }elseif(Auth::user()->hasRole('propietario')){
+            $publicaciones = Publicacion::where('id_usuario', Auth::user()->id)->get();
+        }
+        //mostrar las publicaciones que tengan el estado en 'Activo' y que pertenezcan al usuario autenticado
+//        $publicaciones = Publicacion::where('estado_publicacion', 'Activo')->where('id_usuario', Auth::user()->id)->get();
 
-        return view('publicaciones.index',compact('publicaciones','tiposPropiedades'));
+
+//        $publicaciones = Publicacion::get()->where('id_usuario',Auth::user()->id);
+        $tiposPropiedades = TipoPropiedad::get();
+        $imagenes = Imagen::get();
+
+        return view('publicaciones.index',compact('publicaciones','tiposPropiedades', 'imagenes'));
+    }
+
+    public function pagar(Publicacion $publicacion, Request $request){
+
+        $payment_id = $request->get('payment_id');
+
+        $respuesta = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-141489167613208-102209-72a86348e61a8e789f1e8739cf212924-1222873954");
+        $respuesta = json_decode($respuesta);
+
+        $status = $respuesta->status;//Aprobado o Rechazado o Pendiente
+        $payment_method_id = $respuesta->payment_method_id;//Obtener el metodo de pago(visa, mastercard, etc)
+        $payment_type_id = $respuesta->payment_type_id;//Obtener el tipo de pago(credit_card, ticket, etc)
+
+        if($status == 'approved'){
+            $publicacion->estado_publicacion = 'Alquilado';
+            $publicacion->save();
+
+            return redirect()->route('publicaciones.index');
+        }
     }
 
     public function show(Publicacion $publicacion)
     {
         //return $publicacion;
         //return Publicacion::findOrFail($publicacion);
+
         return view('publicaciones.show',['publicacion'=> $publicacion]);
     }
 
@@ -88,21 +120,37 @@ class PublicacionController extends Controller
         $imagenes3 = $request->file('file3')->store('public/imagenes');
         $imagenes4 = $request->file('file4')->store('public/imagenes');
 
-        $url = Storage::url($imagenes);
-        $url1 = Storage::url($imagenes1);
-        $url2 = Storage::url($imagenes2);
-        $url3 = Storage::url($imagenes3);
-        $url4 = Storage::url($imagenes4);
-
-        $imageness->url_imagen = $url;
-        $imageness->url_imagen = $url1;
-        $imageness->url_imagen = $url2;
-        $imageness->url_imagen = $url3;
-        $imageness->url_imagen = $url4;
-
+//        $url = Storage::url($imagenes);
+//        $url1 = Storage::url($imagenes1);
+//        $url2 = Storage::url($imagenes2);
+//        $url3 = Storage::url($imagenes3);
+//        $url4 = Storage::url($imagenes4);
 
         $publicacion->save();
-        //Se guarda la imagen despues que se creo la publicacion
+        //Se guarda las imagenes en la tabla imagenes despues que se creo la publicacion
+        $url = Storage::url($imagenes);
+        $imageness->url_imagen = $url;
+        $imageness->id_publicacion = $publicacion->id;
+        $imageness->save();
+
+        $url1 = Storage::url($imagenes1);
+        $imageness->url_imagen = $url1;
+        $imageness->id_publicacion = $publicacion->id;
+        $imageness->save();
+
+        $url2 = Storage::url($imagenes2);
+        $imageness->url_imagen = $url2;
+        $imageness->id_publicacion = $publicacion->id;
+        $imageness->save();
+
+        $url3 = Storage::url($imagenes3);
+        $imageness->url_imagen = $url3;
+        $imageness->save();
+        $imageness->id_publicacion = $publicacion->id;
+//        $imageness->save();
+
+        $url4 = Storage::url($imagenes4);
+        $imageness->url_imagen = $url4;
         $imageness->id_publicacion = $publicacion->id;
         $imageness->save();
 
@@ -178,6 +226,10 @@ class PublicacionController extends Controller
 
     public function destroy(Request $request, Publicacion $publicacion)
     {
+        //cambiar el valor de estado de activo a descativado
+//        $publicacion->estado_publicacion = 0;
+        $publicacion->estado_publicacion = "Desactivado";
+        $publicacion->save();
         $publicacion->delete();
 
         return to_route('publicaciones.index')->with('estado_publicacion','Se elimino de manera exitosa la Publicacion');
@@ -193,8 +245,9 @@ class PublicacionController extends Controller
     public function borradoUsuario()
     {
         $publicaciones = Publicacion::onlyTrashed()->get();
+        $tiposPropiedades = TipoPropiedad::get();
 
-        return view('publicaciones.borradores.borradores',['publicaciones'=> $publicaciones]);
+        return view('publicaciones.borradores.borradores',['publicaciones'=> $publicaciones,'tiposPropiedades' => $tiposPropiedades]);
     }
 
     public function eliminarPublicacionesBasura($id)
@@ -208,6 +261,8 @@ class PublicacionController extends Controller
     public function restaurarPublicacion($id)
     {
         $publicaciones = Publicacion::onlyTrashed()->findOrFail($id);
+        $publicaciones->estado_publicacion ='Activo';
+//        $publicaciones->save();
         $publicaciones->restore();
 
         return to_route('publicaciones.index')->with('estado_publicacion','Se restauro de manera exitosa la Publicacion');

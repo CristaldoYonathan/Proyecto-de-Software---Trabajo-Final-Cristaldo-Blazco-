@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuditoriaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
@@ -18,4 +19,8 @@ Route::resource('roles', RoleController::class) -> names('admin.roles');
 Route::get('/publicaciones/borrado',[PublicacionController::class,'borrado'])->name('publicaciones.borrado');
 //Route::resource('publicaciones/', PublicacionController::class) -> names('admin.publicaciones');
 
+//ruta para recuperar registros de auditoria //Poer si sirve se queda
+//Route::get('admin/auditoria', [AuditoriaController::class, 'index']) -> name('admin.auditoria');
+//Route::get('admin/auditoria/index') -> name('admin.auditoria.index');
+//Route::view('/auditoria/index','admin/auditoria/index')->name('index');
 
