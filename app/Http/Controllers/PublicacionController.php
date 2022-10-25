@@ -65,8 +65,9 @@ class PublicacionController extends Controller
     {
         //return $publicacion;
         //return Publicacion::findOrFail($publicacion);
+        $imagenes = Imagen::get()->where('id_publicacion',$publicacion->id);
 
-        return view('publicaciones.show',['publicacion'=> $publicacion]);
+        return view('publicaciones.show',['publicacion'=> $publicacion , 'imagenes' => $imagenes]);
     }
 
     public function create(Provincia $provincia, TipoPropiedad $tipoPropiedad, Ciudad $ciudad, Comodidad $comodidad, CaracteristicaComodidad $caracteristicaComodidad)

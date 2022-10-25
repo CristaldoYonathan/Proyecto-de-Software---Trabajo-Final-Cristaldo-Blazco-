@@ -14,7 +14,11 @@
             <div class="col-lg-5 pb-5 mt-9">
                 <div id="carousel-1" class="carousel slide shadow-lg" data-bs-ride="true">
                     <div class="carousel-inner">
-                        <div class="carousel-item active ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/1.webp')}}" alt="Slide Image" /></div>
+                        <div class="carousel-item active ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="@foreach($imagenes as $imagen)
+                                                    @if($imagen->id_publicacion == $publicacion->id)
+                                                        {{asset($imagen->url_imagen)}}
+                                                    @endif
+                                                    @endforeach" alt="Slide Image" /></div>
                         <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/2.webp')}}" alt="Slide Image" /></div>
                         <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/3.webp')}}" alt="Slide Image" /></div>
                     </div>
