@@ -251,7 +251,11 @@
                                     <h6 class="p-2" >{{$comodidad->nombre_comodidad}}</h6>
                                     @foreach($caracteristicasComodidades->where('id_comodidad',$comodidad->id) as $caracteristica)
                                         <div class="col form-check-inline">
-                                            <input type="checkbox" name="caracteristicas[]" value="{{$caracteristica->id}}" id="{{$caracteristica->id}}" class="form-check-input ">
+                                            <input type="checkbox" name="caracteristicas[]" value="{{$caracteristica->id}}" id="{{$caracteristica->id}}" class="form-check-input"
+                                               @if($publicacion->caracteristica_comodidades->contains($caracteristica->id))
+                                                   checked
+                                                  @endif
+                                            />
                                             <label for="{{$caracteristica->id}}">{{$caracteristica->nombre_caracteristica_comodidad}}</label>
                                         </div>
                                     @endforeach

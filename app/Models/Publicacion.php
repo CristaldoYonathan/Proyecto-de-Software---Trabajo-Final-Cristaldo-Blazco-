@@ -111,7 +111,7 @@ class Publicacion extends Model implements Auditable
 //    muchos a muchos con CaraacteristicaComodidad
     public function caracteristica_comodidades()
     {
-        return $this->belongsToMany(CaracteristicaComodidad::class, 'caracteristica_comodidad_publicacion', 'id_publicacion', 'id_caracteristica_comodidad');
+        return $this->belongsToMany(CaracteristicaComodidad::class, 'caracteristica_comodidad_publicacion', 'id_publicacion', 'id_caracteristica');
     }
 
     //uno a muchos imagen
