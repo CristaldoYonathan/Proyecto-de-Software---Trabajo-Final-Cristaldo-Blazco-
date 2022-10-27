@@ -31,6 +31,8 @@ return new class extends Migration
             $table->double('precio_publicacion');
             $table->string('titulo_publicacion');
             $table->string('descripcion_publicacion');
+            $table->string('longitud_publicacion');
+            $table->string('latitud_publicacion');
 
             $table->softDeletes();
             $table->timestamps();

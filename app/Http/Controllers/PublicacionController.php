@@ -61,13 +61,14 @@ class PublicacionController extends Controller
         }
     }
 
-    public function show(Publicacion $publicacion)
+    public function show(Publicacion $publicacion, CaracteristicaComodidad $caracteristicaComodidad)
     {
-        //return $publicacion;
-        //return Publicacion::findOrFail($publicacion);
-        $imagenes = Imagen::get()->where('id_publicacion',$publicacion->id);
 
-        return view('publicaciones.show',['publicacion'=> $publicacion , 'imagenes' => $imagenes]);
+        $caracteristicaComodidades = CaracteristicaComodidad::get()->where('id_publicacion',$publicacion->id);
+        $imagenes = Imagen::get();
+
+        return view('publicaciones.show',compact('publicacion','caracteristicaComodidades', 'imagenes'));
+//        return view('publicaciones.show',['publicacion'=> $publicacion]);
     }
 
     public function create(Provincia $provincia, TipoPropiedad $tipoPropiedad, Ciudad $ciudad, Comodidad $comodidad, CaracteristicaComodidad $caracteristicaComodidad)
@@ -97,6 +98,7 @@ class PublicacionController extends Controller
         $publicacion = new Publicacion;
         $imageness = new Imagen;
 
+
         $publicacion->calle_publicacion = $request->input('calle');
         $publicacion->estado_publicacion = "Activo";
         $publicacion->altura_publicacion = $request->input('altura');
@@ -112,8 +114,14 @@ class PublicacionController extends Controller
         $publicacion->id_tipo_propiedad = $request->input('tipo_propiedad');
         $publicacion->id_provincia = $request->input('provincia');
         $publicacion->id_ciudad = $request->input('ciudad');
+        $publicacion->longitud_publicacion = $request->input('longitud');
+        $publicacion->latitud_publicacion = $request->input('latitud');
 //        obtener el usuario logueado
         $publicacion->id_usuario = auth()->user()-> getAuthIdentifier();
+
+
+
+
         //Se obtiene la imagen
         $imagenes = $request->file('file')->store('public/imagenes');
         $imagenes1 = $request->file('file1')->store('public/imagenes');
@@ -128,6 +136,9 @@ class PublicacionController extends Controller
 //        $url4 = Storage::url($imagenes4);
 
         $publicacion->save();
+        $publicacion->caracteristica_comodidades()->attach($request->input('caracteristicas'));
+
+
         //Se guarda las imagenes en la tabla imagenes despues que se creo la publicacion
         $url = Storage::url($imagenes);
         $imageness->url_imagen = $url;
@@ -153,6 +164,8 @@ class PublicacionController extends Controller
         $url4 = Storage::url($imagenes4);
         $imageness->url_imagen = $url4;
         $imageness->id_publicacion = $publicacion->id;
+
+
         $imageness->save();
 
         session()->flash('estado_publicacion','Se publico de manera exitosa la Propiedad');
@@ -170,13 +183,6 @@ class PublicacionController extends Controller
 
         return view('publicaciones.edit', compact('publicacion', 'provincias', 'tiposPropiedad', 'ciudades', 'comodidades', 'caracteristicasComodidades'));
     }
-//    {
-//        $provincias = Provincia::get();
-//        $tiposPropiedad = TipoPropiedad::get();
-//        $ciudades = Ciudad::get();
-//
-//        return view('publicaciones.edit', compact('publicacion', 'provincias', 'tiposPropiedad', 'ciudades'));
-//    }
 
 
 
@@ -209,6 +215,9 @@ class PublicacionController extends Controller
         $publicacion->titulo_publicacion = $request->input('titulo');
         $publicacion->descripcion_publicacion = $request->input('descripcion');
         $publicacion->id_tipo_propiedad = $request->input('tipo_propiedad');
+        $publicacion->longitud_publicacion = $request->input('longitud');
+        $publicacion->latitud_publicacion = $request->input('latitud');
+        $publicacion->caracteristica_comodidades()->sync($request->input('caracteristicas'));
 
 //        $publicacion->id_provincia = $request->input('provincia');
         //Pagina 4 del formulario

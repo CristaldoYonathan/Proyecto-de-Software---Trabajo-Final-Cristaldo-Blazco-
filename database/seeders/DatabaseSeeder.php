@@ -27,6 +27,8 @@ use Illuminate\Database\Seeder;
 $this->call([
     UserSeeder::class,
     RoleSeeder::class,
+    Comodidades::class,
+    ProvinciasCiudades::class,
 ]);
 
 

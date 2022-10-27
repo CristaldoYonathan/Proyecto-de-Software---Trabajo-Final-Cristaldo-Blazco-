@@ -179,7 +179,7 @@
                                     <div class="d-flex align-items-center justify-content-lg-end">
                                         <div class="bg-primary p-2 mr-3 rounded-circle position-relative" style="height: 32px; width: 32px;"><i class="fas fa-map-marker-alt text-white w-50 h-50 position-absolute"></i></div>
                                         <div>
-                                            <a href="https://www.google.com/maps/search/?api=1&query={{$publicacion->calle_publicacion . "+" . $publicacion->altura_publicacion . "+" . $publicacion->ciudad()->first()->nombre_ciudad}}&zoom=20" target="_blank">link</a>
+                                            <a href="https://www.google.com/maps/search/?api=1&query={{$publicacion->latitud_publicacion . ", " . $publicacion->longitud_publicacion  }}&zoom=20" target="_blank">link</a>
 
                                             <h6 class="font-weight-semi-bold ms-2 mb-0">Ver en el mapa</h6>
                                             <small class="text-muted ms-2">{{$publicacion->calle_publicacion}} - {{$publicacion->altura_publicacion}} - {{$publicacion->ciudad()->first()->nombre_ciudad}}</small>
@@ -189,10 +189,9 @@
 
                                 {{--                            Mapa PROVICIONAL--}}
                                 <div class="w-90 m-auto">
-                                    <div class="form-row mt-4 shadow-none p-1 mb-5 bg-light rounded">
+                                    <div class="form-row mt-4 shadow-none p-1 mb- bg-light rounded">
                                         {{--                                            <div class="col">--}}
-                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.792756304504!2d-58.38111168518594!3d-34.6037229804598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcbf0b0b0b0b0b%3A0x1b0b0b0b0b0b0b0b!2sCalle%20Falsa%20123%2C%20C1425%20CABA!5e0!3m2!1ses-419!2sar!4v1620921000000!5m2!1ses-419!2sar" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                        {{--                                            </div>--}}
+                                        <div id="map" style="width: 100%; height:600px"></div>                                        {{--                                            </div>--}}
                                     </div>
                                 </div>
 
@@ -274,6 +273,45 @@
             }
         }
     </script>
+
+    <script>
+
+        function iniciarMap(){
+
+
+            // establecer un marker con el imagen map-marker-2-512.png
+            // var icono = {
+            //     url: '../../assets/img/map-marker-2-512.png',
+            //     scaledSize: new google.maps.Size(30, 30),
+            //     origin: new google.maps.Point(0,0),
+            //     anchor: new google.maps.Point(16, 31)
+            //
+            // };
+
+            // Obtenemos la posicion de la publicacion
+            var posicion = {lat: {{$publicacion->latitud_publicacion}}, lng: {{$publicacion->longitud_publicacion}}};
+
+            // Creamos el mapa
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: posicion
+            });
+
+            // Creamos el marker
+            var marker = new google.maps.Marker({
+                position: posicion,
+                map: map,
+                // icon: icono
+            });
+
+
+        }
+
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFRitCKrHHCHbh9KlJed9j697DDQEW-Go&callback=iniciarMap"></script>
+
     </body>
 </x-app-layout>
 

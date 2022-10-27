@@ -49,7 +49,9 @@ class Publicacion extends Model implements Auditable
 {
 	use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
-	protected $table = 'publicacion';
+
+
+    protected $table = 'publicacion';
 
 	protected $casts = [
 		'altura_publicacion' => 'int',
@@ -63,7 +65,8 @@ class Publicacion extends Model implements Auditable
 		'id_usuario' => 'int',
 		'id_tipo_propiedad' => 'int',
 		'id_provincia' => 'int',
-		'id_ciudad' => 'int'
+		'id_ciudad' => 'int',
+
 	];
 
 	protected $fillable = [
@@ -85,7 +88,10 @@ class Publicacion extends Model implements Auditable
 		'id_usuario',
 		'id_tipo_propiedad',
 		'id_provincia',
-		'id_ciudad'
+		'id_ciudad',
+        'longitud_publicacion',
+        'latitud_publicacion',
+
 	];
 
 	public function ciudad()
