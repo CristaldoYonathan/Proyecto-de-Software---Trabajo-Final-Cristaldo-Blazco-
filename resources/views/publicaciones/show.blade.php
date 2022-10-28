@@ -1,35 +1,104 @@
 <x-app-layout>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
-    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css', 'resources/js/map.js','resources/js/bootstrap-select.js', 'resources/css/bootstrap.js'])
+    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css', 'resources/js/map.js', 'resources/js/bootstrap.js'])
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-
 
 
     <body class="container bg-gray-200">
     <div class="container-fluid ">
         <div class="row px-xl-5">
             <div class="col-lg-5 pb-5 mt-9">
-                <div id="carousel-1" class="carousel slide shadow-lg" data-bs-ride="true">
-                    <div class="carousel-inner">
+
+
+{{--                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">--}}
+{{--                    <ol class="carousel-indicators">--}}
+{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>--}}
+{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--}}
+{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--}}
+{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>--}}
+{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>--}}
+{{--                    </ol>--}}
+{{--                    <div class="carousel-inner" {{$cantidad = 1}}>--}}
+
 {{--                        @foreach($imagenes as $imagen)--}}
 {{--                            @if($imagen->id_publicacion == $publicacion->id)--}}
-{{--                                <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset($imagen->url_imagen)}}}" alt="Slide Image" /></div>--}}
+
+{{--                                <div class="carousel-item @if($cantidad == 1) active @endif ratio ratio-1x1 ">--}}
+{{--                                    <img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset($imagen->url_imagen)}}" alt="@if($cantidad == 1)First slide @elseif($cantidad == 2)Second slide @elseif($cantidad == 3)Third slide @endif">--}}
+{{--                                </div {{++$cantidad}}>--}}
+
 {{--                            @endif--}}
 {{--                        @endforeach--}}
-                        <div class="carousel-item active ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/2.webp')}}" alt="Slide Image" /></div>
-                        <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/2.webp')}}" alt="Slide Image" /></div>
-                        <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/3.webp')}}" alt="Slide Image" /></div>
+{{--                    </div>--}}
+{{--                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">--}}
+{{--                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
+{{--                        <span class="sr-only">Previous</span>--}}
+{{--                    </a>--}}
+{{--                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">--}}
+{{--                        <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
+{{--                        <span class="sr-only">Next</span>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+
+
+
+                <div id="carousel-1" class="carousel slide shadow-lg" data-bs-ride="true">
+                    <div class="carousel-inner" {{$cantidad = 1}}>
+
+                        @foreach($imagenes as $imagen)
+                            @if($imagen->id_publicacion == $publicacion->id)
+                        <div class="carousel-item @if($cantidad == 1) active @endif ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset($imagen->url_imagen)}}" alt="Slide Image" /></div {{++$cantidad}}>
+                            @endif
+                        @endforeach
+{{--                        <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/2.webp')}}" alt="Slide Image" /></div>--}}
+{{--                        <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/3.webp')}}" alt="Slide Image" /></div>--}}
                     </div>
-                    <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></a></div>
+                    <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="fa fa-arrow-left fa-2x" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="fa fa-arrow-right fa-2x" aria-hidden="true"></span><span class="visually-hidden">Next</span></a></div>
                     <ol class="carousel-indicators">
                         <li class="active" data-bs-target="#carousel-1" data-bs-slide-to="0"></li>
                         <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
                         <li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
+                        <li data-bs-target="#carousel-1" data-bs-slide-to="3"></li>
+                        <li data-bs-target="#carousel-1" data-bs-slide-to="4"></li>
                     </ol>
                 </div>
+
+
+
+
+{{--                <div id="thumbCarousel" class="carousel slide">--}}
+{{--                    <div class="carousel-inner">--}}
+{{--                        <?php $i=0; foreach($imagenes as $imagen){?>--}}
+{{--                            <?php if($i==0){ ?><div class="item active"><?php } ?>--}}
+{{--                                                                            <?php if($i % 2 == 0){ ?><div class="item"><?php }?>--}}
+{{--                                <div class="col-xs-3">--}}
+{{--                                    <a href="<?php echo $sr['url']; ?>">--}}
+{{--                                        <img src="<?php echo BASE_URL?>/partner-images/<?php echo $sr['name']?>" />--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                                    <?php if($i % 4 != 0){ ?></div><?php }?>--}}
+{{--                                                                       <?php $i++; } ?>--}}
+{{--                        </div>--}}
+{{--                        <a class="thumbleft" href="#thumbCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>--}}
+{{--                        <a class="thumbright" href="#thumbCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span> </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
 
             <div class="col-lg-7 pb-5 mt-9">
@@ -312,6 +381,11 @@
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFRitCKrHHCHbh9KlJed9j697DDQEW-Go&callback=iniciarMap"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     </body>
 </x-app-layout>
