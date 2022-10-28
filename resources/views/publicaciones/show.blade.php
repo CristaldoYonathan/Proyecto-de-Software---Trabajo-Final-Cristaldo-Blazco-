@@ -13,38 +13,6 @@
             <div class="col-lg-5 pb-5 mt-9">
 
 
-{{--                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">--}}
-{{--                    <ol class="carousel-indicators">--}}
-{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>--}}
-{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--}}
-{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--}}
-{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>--}}
-{{--                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>--}}
-{{--                    </ol>--}}
-{{--                    <div class="carousel-inner" {{$cantidad = 1}}>--}}
-
-{{--                        @foreach($imagenes as $imagen)--}}
-{{--                            @if($imagen->id_publicacion == $publicacion->id)--}}
-
-{{--                                <div class="carousel-item @if($cantidad == 1) active @endif ratio ratio-1x1 ">--}}
-{{--                                    <img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset($imagen->url_imagen)}}" alt="@if($cantidad == 1)First slide @elseif($cantidad == 2)Second slide @elseif($cantidad == 3)Third slide @endif">--}}
-{{--                                </div {{++$cantidad}}>--}}
-
-{{--                            @endif--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-{{--                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">--}}
-{{--                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
-{{--                        <span class="sr-only">Previous</span>--}}
-{{--                    </a>--}}
-{{--                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">--}}
-{{--                        <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
-{{--                        <span class="sr-only">Next</span>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-
-
-
                 <div id="carousel-1" class="carousel slide shadow-lg" data-bs-ride="true">
                     <div class="carousel-inner" {{$cantidad = 1}}>
 
@@ -53,9 +21,7 @@
                         <div class="carousel-item @if($cantidad == 1) active @endif ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset($imagen->url_imagen)}}" alt="Slide Image" /></div {{++$cantidad}}>
                             @endif
                         @endforeach
-{{--                        <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/2.webp')}}" alt="Slide Image" /></div>--}}
-{{--                        <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/3.webp')}}" alt="Slide Image" /></div>--}}
-                    </div>
+               </div>
                     <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="fa fa-arrow-left fa-2x" aria-hidden="true"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="fa fa-arrow-right fa-2x" aria-hidden="true"></span><span class="visually-hidden">Next</span></a></div>
                     <ol class="carousel-indicators">
                         <li class="active" data-bs-target="#carousel-1" data-bs-slide-to="0"></li>
@@ -65,40 +31,6 @@
                         <li data-bs-target="#carousel-1" data-bs-slide-to="4"></li>
                     </ol>
                 </div>
-
-
-
-
-{{--                <div id="thumbCarousel" class="carousel slide">--}}
-{{--                    <div class="carousel-inner">--}}
-{{--                        <?php $i=0; foreach($imagenes as $imagen){?>--}}
-{{--                            <?php if($i==0){ ?><div class="item active"><?php } ?>--}}
-{{--                                                                            <?php if($i % 2 == 0){ ?><div class="item"><?php }?>--}}
-{{--                                <div class="col-xs-3">--}}
-{{--                                    <a href="<?php echo $sr['url']; ?>">--}}
-{{--                                        <img src="<?php echo BASE_URL?>/partner-images/<?php echo $sr['name']?>" />--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                                    <?php if($i % 4 != 0){ ?></div><?php }?>--}}
-{{--                                                                       <?php $i++; } ?>--}}
-{{--                        </div>--}}
-{{--                        <a class="thumbleft" href="#thumbCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>--}}
-{{--                        <a class="thumbright" href="#thumbCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span> </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
 
             <div class="col-lg-7 pb-5 mt-9">
@@ -152,7 +84,7 @@
                         </div>
                     </div>
 
-                    {{--                    <c:if  test="${publicacion.cocheraPublicacion > 0}">--}}
+
                     <div class="col-6">
                         <div class="d-flex align-items-center mb-3">
                             <div class="bg-primary p-2 mr-3 rounded-circle position-relative" style="height: 32px; width: 32px;"><i class="fas fa-car text-white w-50 h-50 position-absolute"></i></div>
@@ -161,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--                    </c:if>--}}
+
                 </div>
 
                 <div class="col w-70 mt-4">
@@ -260,8 +192,7 @@
                                 {{--                            Mapa PROVICIONAL--}}
                                 <div class="w-90 m-auto">
                                     <div class="form-row mt-4 shadow-none p-1 mb- bg-light rounded">
-                                        {{--                                            <div class="col">--}}
-                                        <div id="map" style="width: 100%; height:600px"></div>                                        {{--                                            </div>--}}
+                                        <div id="map" style="width: 100%; height:600px"></div>
                                     </div>
                                 </div>
 
@@ -347,16 +278,6 @@
     <script>
 
         function iniciarMap(){
-
-
-            // establecer un marker con el imagen map-marker-2-512.png
-            // var icono = {
-            //     url: '../../assets/img/map-marker-2-512.png',
-            //     scaledSize: new google.maps.Size(30, 30),
-            //     origin: new google.maps.Point(0,0),
-            //     anchor: new google.maps.Point(16, 31)
-            //
-            // };
 
             // Obtenemos la posicion de la publicacion
             var posicion = {lat: {{$publicacion->latitud_publicacion}}, lng: {{$publicacion->longitud_publicacion}}};
