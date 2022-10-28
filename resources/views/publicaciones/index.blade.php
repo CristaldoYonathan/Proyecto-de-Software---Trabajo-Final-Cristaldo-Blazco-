@@ -58,6 +58,7 @@
                                                     @foreach($imagenes as $imagen)
                                                     @if($imagen->id_publicacion == $publicacion->id)
                                                         {{asset($imagen->url_imagen)}}
+                                                        @break
                                                     @endif
                                                     @endforeach"
                                                     class="avatar avatar-sm me-3" alt="user1">

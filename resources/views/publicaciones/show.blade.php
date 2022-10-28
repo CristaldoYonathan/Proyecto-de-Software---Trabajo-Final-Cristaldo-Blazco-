@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
-    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css', 'resources/js/map.js'])
+    @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css', 'resources/js/map.js','resources/js/bootstrap-select.js', 'resources/css/bootstrap.js'])
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
@@ -14,11 +14,12 @@
             <div class="col-lg-5 pb-5 mt-9">
                 <div id="carousel-1" class="carousel slide shadow-lg" data-bs-ride="true">
                     <div class="carousel-inner">
-                        <div class="carousel-item active ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="@foreach($imagenes as $imagen)
-                                                    @if($imagen->id_publicacion == $publicacion->id)
-                                                        {{asset($imagen->url_imagen)}}
-                                                    @endif
-                                                    @endforeach" alt="Slide Image" /></div>
+{{--                        @foreach($imagenes as $imagen)--}}
+{{--                            @if($imagen->id_publicacion == $publicacion->id)--}}
+{{--                                <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset($imagen->url_imagen)}}}" alt="Slide Image" /></div>--}}
+{{--                            @endif--}}
+{{--                        @endforeach--}}
+                        <div class="carousel-item active ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/2.webp')}}" alt="Slide Image" /></div>
                         <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/2.webp')}}" alt="Slide Image" /></div>
                         <div class="carousel-item ratio ratio-1x1 "><img class="rounded" style="object-fit:cover; height:100%; width: 100%;" src="{{asset('img/rents/3.webp')}}" alt="Slide Image" /></div>
                     </div>

@@ -97,6 +97,11 @@ class PublicacionController extends Controller
 
         $publicacion = new Publicacion;
         $imageness = new Imagen;
+        $imageness2 = new Imagen;
+        $imageness3 = new Imagen;
+        $imageness4 = new Imagen;
+        $imageness5 = new Imagen;
+
 
 
         $publicacion->calle_publicacion = $request->input('calle');
@@ -146,27 +151,28 @@ class PublicacionController extends Controller
         $imageness->save();
 
         $url1 = Storage::url($imagenes1);
-        $imageness->url_imagen = $url1;
-        $imageness->id_publicacion = $publicacion->id;
-        $imageness->save();
+        $imageness2->url_imagen = $url1;
+        $imageness2->id_publicacion = $publicacion->id;
+        $imageness2->save();
 
         $url2 = Storage::url($imagenes2);
-        $imageness->url_imagen = $url2;
-        $imageness->id_publicacion = $publicacion->id;
-        $imageness->save();
+        $imageness3->url_imagen = $url2;
+        $imageness3->id_publicacion = $publicacion->id;
+        $imageness3->save();
 
         $url3 = Storage::url($imagenes3);
-        $imageness->url_imagen = $url3;
-        $imageness->save();
-        $imageness->id_publicacion = $publicacion->id;
+        $imageness4->url_imagen = $url3;
+        $imageness4->id_publicacion = $publicacion->id;
+        $imageness4->save();
+
 //        $imageness->save();
 
         $url4 = Storage::url($imagenes4);
-        $imageness->url_imagen = $url4;
-        $imageness->id_publicacion = $publicacion->id;
+        $imageness5->url_imagen = $url4;
+        $imageness5->id_publicacion = $publicacion->id;
 
 
-        $imageness->save();
+        $imageness5->save();
 
         session()->flash('estado_publicacion','Se publico de manera exitosa la Propiedad');
 
