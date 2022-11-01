@@ -6,6 +6,7 @@ use App\Models\CaracteristicaComodidad;
 use App\Models\Ciudad;
 use App\Models\Comodidad;
 use App\Models\Imagen;
+use App\Models\MercadoPagoTransaccion;
 use App\Models\Provincia;
 use App\Models\Publicacion;
 use App\Models\TipoPropiedad;
@@ -47,15 +48,33 @@ class PublicacionController extends Controller
         $payment_id = $request->get('payment_id');
 
         $respuesta = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-141489167613208-102209-72a86348e61a8e789f1e8739cf212924-1222873954");
-        $respuesta = json_decode($respuesta);
+        $respuesta = json_decode($respuesta);//se pueden sacar varios datos de la respuesta
 
+        $id_transaccion = $respuesta->id;
         $status = $respuesta->status;//Aprobado o Rechazado o Pendiente
+        $transaction_amount = $respuesta->transaction_amount;//obtener el monto de transaccion
         $payment_method_id = $respuesta->payment_method_id;//Obtener el metodo de pago(visa, mastercard, etc)
         $payment_type_id = $respuesta->payment_type_id;//Obtener el tipo de pago(credit_card, ticket, etc)
 
         if($status == 'approved'){
             $publicacion->estado_publicacion = 'Alquilado';
             $publicacion->save();
+
+            //guardar datos en la tabla de mercado-pago-transacciones
+            $mercadoPagoTransaccion = new MercadoPagoTransaccion();
+            $mercadoPagoTransaccion->numero_transaccion = $id_transaccion;
+            $mercadoPagoTransaccion->estado_transaccion = $status;
+            $mercadoPagoTransaccion->monto_transaccion = $transaction_amount;
+            $mercadoPagoTransaccion->metodo_pago = $payment_method_id;
+            $mercadoPagoTransaccion->tipo_pago = $payment_type_id;
+            $mercadoPagoTransaccion->id_usuario = Auth::user()->id;
+            $mercadoPagoTransaccion->nombre_usuario = Auth::user()->name;
+            $mercadoPagoTransaccion->id_publicacion = $publicacion->id;
+            $mercadoPagoTransaccion->save();
+
+            //enviar correo al propietario de la publicacion (ver que onda con el envio de correos)
+//            $propietario = User::find($publicacion->id_usuario);
+//            $propietario->notify(new \App\Notifications\PublicacionAlquilada($publicacion));
 
             return redirect()->route('publicaciones.index');
         }

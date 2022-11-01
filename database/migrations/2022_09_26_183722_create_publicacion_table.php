@@ -80,6 +80,20 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        //crear tabla mercado pago transacciones sin clave foranea
+        Schema::create('mercado-pago-transacciones', function (Blueprint $table) {
+            $table->id();
+            $table->string('numero_transaccion');
+            $table->double('monto_transaccion');
+            $table->string('estado_transaccion');
+            $table->string('metodo_pago');
+            $table->string('tipo_pago');
+            $table->string('id_usuario');
+            $table->string('nombre_usuario');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
         //una publicacion tiene muchas imagenes (No es necesaria almenos que queramos hacer una relacion de doble sentido)
 //        Schema::table('publicacion', function (Blueprint $table) {
 //            $table->foreignId('id_imagen')->constrained('imagen');
@@ -87,6 +101,11 @@ return new class extends Migration
 
         //una imagen es para una publicacion
         Schema::table('imagen', function (Blueprint $table) {
+            $table->foreignId('id_publicacion')->constrained('publicacion');
+        });
+
+        //una publicacion tiene muchas transacciones de mercado pago
+        Schema::table('mercado-pago-transacciones', function (Blueprint $table) {
             $table->foreignId('id_publicacion')->constrained('publicacion');
         });
 

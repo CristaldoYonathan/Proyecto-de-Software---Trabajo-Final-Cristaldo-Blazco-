@@ -243,6 +243,11 @@
         });
         // //deshabilitar el boton de pago
         // document.querySelector("#pay-button").disabled = false;
+
+        //deshanilitar el boton de pago si el estado de la publicacion es igual a Alquilado
+        if("{{$publicacion->estado_publicacion}}" == "Alquilado"){
+            document.querySelector("#pay-button").disabled = true;
+        }
         mp.checkout({
             preference: {
                 id: '{{$preference->id}}'// id de la preferencia

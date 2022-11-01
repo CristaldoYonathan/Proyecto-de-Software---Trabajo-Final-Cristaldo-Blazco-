@@ -125,4 +125,6 @@ class Publicacion extends Model implements Auditable
     {
         return $this->hasMany(Imagen::class, 'id_publicacion');
     }
+
+
 }
