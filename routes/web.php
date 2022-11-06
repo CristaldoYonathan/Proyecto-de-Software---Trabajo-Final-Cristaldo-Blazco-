@@ -16,6 +16,14 @@ use App\Http\Controllers\PublicacionController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//DB::listen(function($query){
+//    //Imprimimos la consulta ejecutada
+//    echo " {$query->sql }";
+//});
+
+
+
 //Pagina de Inicio
 Route::view('/','welcome')->name('inicio');
 
