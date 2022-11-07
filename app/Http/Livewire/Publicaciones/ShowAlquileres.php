@@ -26,6 +26,13 @@ class ShowAlquileres extends Component
     public $filtroProvincia = "";
     public $filtroComodidades = [];
     public $ordenar = "asc";
+    public $superficieDesde = "";
+    public $superficieHasta = "";
+
+    public function limpiarFiltros(){
+        $this->reset(['search', 'precioDesde', 'precioHasta', 'tipoPropiedad', 'filtroProvincia', 'filtroComodidades', 'ordenar', 'superficieDesde', 'superficieHasta']);
+    }
+
 
     public function render()
     {
@@ -42,7 +49,6 @@ class ShowAlquileres extends Component
             })
                 ->where('titulo_publicacion', 'LIKE', '%' . $this->search . '%')
                 ->get();
-//            $publicaciones = $publicaciones->paginate(1);
             }
 
             if($this->precioHasta != ""){
@@ -62,9 +68,13 @@ class ShowAlquileres extends Component
                 $publicaciones = $publicaciones->where('id_provincia', $this->filtroProvincia);
             }
 
+            if ($this->superficieDesde != "") {
+                $publicaciones = $publicaciones->where('superficie_cubierta_casa', '>=', $this->superficieDesde);
+            }
 
-
-
+            if ($this->superficieHasta != "") {
+                $publicaciones = $publicaciones->where('superficie_cubierta_casa', '<=', $this->superficieHasta);
+            }
 
 
 

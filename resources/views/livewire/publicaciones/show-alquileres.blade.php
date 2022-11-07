@@ -2,11 +2,15 @@
     @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/css/nucleo-svg.css','resources/js/material-kit.js'])
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
+
+
     <div class="row px-xl-5">
 
 {{--         Sidebar de filtros de busqueda --}}
         <div class="col-lg-3 col-md-12 p-3">
             <div class="card p-3">
+
+
                 <div class="card-header">
                     <h4 class="card-title">Puede filtrar por:</h4>
                 </div>
@@ -34,17 +38,21 @@
 
 {{--                Dimensiones start--}}
                 <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4"><i class="fas fa-ruler-combined text-primary me-3"></i>Dimensiones</h5>
+                    <h5 class="font-weight-semi-bold mb-4" title="Multiplicacion del largo por el ancho del lugar"><i class="fas fa-ruler-combined text-primary me-3" ></i>Dimensiones en m<sup>2</sup></h5>
                     <form>
-                        <div class="form-group mb-4">
-                            <label>Desde:</label>
-                            <input type="range" value="1" min="0" max="100000" step="500" oninput="this.nextElementSibling.value = this.value">
-                            <output>1</output> mts2
-                        </div>
-                        <div class="form-group mb-4">
-                            <label>Hasta:</label>
-                            <input type="range" value="15000" min="0" max="100000" step="500" oninput="this.nextElementSibling.value = this.value">
-                            <output>15000</output> mts2
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="input-group input-group-outline bg-light rounded">
+                                    <label class="form-label">Desde</label>
+                                    <input wire:model="superficieDesde" type="number" class="form-control" id="superficieDesde" >
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-outline bg-light rounded">
+                                    <label class="form-label">Hasta</label>
+                                    <input wire:model="superficieHasta" type="number" class="form-control" id="superficieHasta" >
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -117,45 +125,15 @@
                 </div>
                 @endforeach
 
-{{--                 Pet friendly start --}}
-{{--                <div class="border-bottom mb-4 pb-4">--}}
-{{--                    <h5 class="font-weight-semi-bold mb-4"><i class="fas fa-paw text-primary me-3"></i>Pet friendly</h5>--}}
-{{--                    <form>--}}
-{{--                        <div class="form-check">--}}
-{{--                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault35">--}}
-{{--                            <label class="form-check-label" for="flexCheckDefault35">--}}
-{{--                                Si--}}
-{{--                            </label>--}}
-{{--                        </div>--}}
-{{--                        <div class="form-check">--}}
-{{--                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault789">--}}
-{{--                            <label class="form-check-label" for="flexCheckDefault789">--}}
-{{--                                No--}}
-{{--                            </label>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--                 Pet friendly end --}}
+{{--                boton centrado de mostrar mas--}}
 
-{{--                 Cochera start --}}
-{{--                <div class="border-bottom mb-4 pb-4">--}}
-{{--                    <h5 class="font-weight-semi-bold mb-4"><i class="fas fa-car text-primary me-3"></i>Cochera</h5>--}}
-{{--                    <form>--}}
-{{--                        <div class="form-check">--}}
-{{--                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault089">--}}
-{{--                            <label class="form-check-label" for="flexCheckDefault089">--}}
-{{--                                Si--}}
-{{--                            </label>--}}
-{{--                        </div>--}}
-{{--                        <div class="form-check">--}}
-{{--                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault345">--}}
-{{--                            <label class="form-check-label" for="flexCheckDefault345">--}}
-{{--                                No--}}
-{{--                            </label>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--                 Cochera end --}}
+                <div class="border-bottom mb-4 pb-4 text-center">
+                    <button onclick="myFunction()" id="myBtn" class="btn btn-link text-decoration-none text-primary p-0 align-items-center justify-content-center ">Mostrar más filtros<i class="fas fa-chevron-down ms-2"></i></button>
+                </div>
+{{--                botón centrado de limpiar filtros--}}
+                <div class="text-center">
+                    <button wire:click="limpiarFiltros" class="btn btn-outline-primary btn-sm">Limpiar filtros</button>
+                </div>
 
             </div>
         </div>
@@ -173,7 +151,7 @@
 
                             <div class="input-group input-group-dynamic mb-4">
                                 <span class="input-group-text"><i class="fas fa-search text-primary mt-1" aria-hidden="true"></i></span>
-                                <input wire:model="search" class="form-control" placeholder="Buscar" type="text" id="buscador" >
+                                <input wire:model="search" class="form-control" placeholder="Buscar por título o descripción" type="text" id="buscador" >
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="d-flex align-items-center">
@@ -228,46 +206,41 @@
                     </div>
 {{--                    Publicaciones end      --}}
 
-{{--                    Paginación            --}}
-                    <div class="col-12 pb-1">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination
-                            @if($publicaciones->lastPage() == 1)
-                                d-none
-                            @endif
-                                justify-content-center mb-3">
-                                <li class="page-item
-                                @if($publicaciones->currentPage() == 1)
-                                    disabled
-                                @endif
-                                    ">
-                                    <a class="page-link" href="{{ $publicaciones->previousPageUrl() }}" aria-label="Previous">
-                                        <span aria-hidden="true">«</span>
-                                        <span class="sr-only">Anterior</span>
-                                    </a>
-                                </li>
-                                @for($i = 1; $i <= $publicaciones->lastPage(); $i++)
-                                    <li class="page-item
-                                    @if($publicaciones->currentPage() == $i)
-                                        active
-                                    @endif
-                                        "><a class="page-link" href="{{ $publicaciones->url($i) }}">{{ $i }}</a></li>
-                                @endfor
-                                <li class="page-item
-                                @if($publicaciones->currentPage() == $publicaciones->lastPage())
-                                    disabled
-                                @endif
-                                    ">
-                                    <a class="page-link" href="{{ $publicaciones->nextPageUrl() }}" aria-label="Next">
-                                        <span aria-hidden="true">»</span>
-                                        <span class="sr-only">Siguiente</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                </div>
+{{--                    Paginación --}}
+{{--                    <div class="container">--}}
+{{--                        <div class="row justify-space-between py-2">--}}
+{{--                            <div class="col-lg-4 mx-auto">--}}
+{{--                                @if($publicaciones->hasPages())--}}
+{{--                                    <ul class="pagination pagination-primary m-4">--}}
+{{--                                        <li class="page-item">--}}
+{{--                                            <a class="page-link" href="javascript:;" aria-label="Previous">--}}
+{{--                                                <span aria-hidden="true"><i class="fa fa-chevron-left"></i></span>--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
+{{--                                        @if($publicaciones->onFirstPage())--}}
+{{--                                            <li class="page-item disabled">--}}
+{{--                                                <a class="page-link" href="javascript:;">1</a>--}}
+{{--                                            </li>--}}
+{{--                                        @else--}}
+{{--                                            <li class="page-item">--}}
+{{--                                                <a class="page-link" href="javascript:;">1</a>--}}
+{{--                                            </li>--}}
+{{--                                        @endif--}}
+{{--                                        <li class="page-item">--}}
+{{--                                            <a class="page-link" href="{{$publicaciones->previousPageUrl()}}" aria-label="Next">--}}
+{{--                                                <span aria-hidden="true"><i class="fa fa-chevron-right"></i></span>--}}
+{{--                                            </a>--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
             </div>
         </div>
     </div>
 {{--     Shop Product End --}}
+</div>
+
 </div>
