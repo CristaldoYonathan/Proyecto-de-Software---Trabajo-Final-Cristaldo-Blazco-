@@ -237,6 +237,15 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
 
+{{--                    paginacion bootstrap--}}
+{{--                    <div class="container">--}}
+{{--                        <div class="row justify-space-between py-2">--}}
+{{--                            <div class="col-lg-4 mx-auto">--}}
+{{--                                {{ $publicaciones->links() }}--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                </div>
             </div>
         </div>
     </div>

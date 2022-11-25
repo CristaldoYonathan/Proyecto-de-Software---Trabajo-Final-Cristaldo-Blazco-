@@ -231,6 +231,7 @@ class PublicacionController extends Controller
         //Pagina 3 del formulario
         $publicacion->ambientes_publicacion = $request->input('ambientes');
         $publicacion->calle_publicacion = $request->input('calle');
+        $publicacion->altura_publicacion = $request->input('altura');
         $publicacion->dormitorios_publicacion = $request->input('dormitorios');
         $publicacion->banios_publicacion = $request->input('baños');
         $publicacion->cochera_publicacion = $request->input('cocheras');
@@ -239,9 +240,14 @@ class PublicacionController extends Controller
         $publicacion->precio_publicacion = $request->input('precio');
         $publicacion->titulo_publicacion = $request->input('titulo');
         $publicacion->descripcion_publicacion = $request->input('descripcion');
+        $publicacion->id_provincia = $request->input('provincia');
+        $publicacion->id_ciudad = $request->input('ciudad');
         $publicacion->id_tipo_propiedad = $request->input('tipo_propiedad');
-        $publicacion->longitud_publicacion = $request->input('longitud');
-        $publicacion->latitud_publicacion = $request->input('latitud');
+//        si longi y lati no estan vacios
+        if($request->input('longitud') != null && $request->input('latitud') != null){
+            $publicacion->longitud_publicacion = $request->input('longitud');
+            $publicacion->latitud_publicacion = $request->input('latitud');
+        }
         $publicacion->caracteristica_comodidades()->sync($request->input('caracteristicas'));
 
 //        $publicacion->id_provincia = $request->input('provincia');

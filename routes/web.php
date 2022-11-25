@@ -35,6 +35,7 @@ Route::post('/publicaciones/borrado/{id}/destroy',[PublicacionController::class,
 
 //Pagina de Auditoria//No funcionaba en otros lados
 Route::get('/admin/auditoria', [AuditoriaController::class, 'index']) -> name('admin.auditoria');
+Route::get('/admin/auditoriamas', [AuditoriaController::class, 'show']) -> name('admin.auditoriamas');
 
 //Pagina de Publicaciones
 Route::get('/registroPropiedad',[PublicacionController::class, 'index'])->name('publicaciones.index');//Pagina principal para el registro de propiedad

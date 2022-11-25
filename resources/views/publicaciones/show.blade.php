@@ -174,16 +174,16 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <h5 class="font-weight-semi-bold">Ubicación</h5>
+                                    <h5 class="font-weight-semi-bold ms-2 mb-0 h6">Ubicación</h5>
                                     <p class="text-muted">{{$publicacion->calle_publicacion . " - " . $publicacion->altura_publicacion . " - " . $publicacion->ciudad()->first()->nombre_ciudad}}</p>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center justify-content-lg-end">
                                         <div class="bg-primary p-2 mr-3 rounded-circle position-relative" style="height: 32px; width: 32px;"><i class="fas fa-map-marker-alt text-white w-50 h-50 position-absolute"></i></div>
                                         <div>
-                                            <a href="https://www.google.com/maps/search/?api=1&query={{$publicacion->latitud_publicacion . ", " . $publicacion->longitud_publicacion  }}&zoom=20" target="_blank">link</a>
+{{--                                            <a href="https://www.google.com/maps/search/?api=1&query={{$publicacion->latitud_publicacion . ", " . $publicacion->longitud_publicacion  }}&zoom=20" target="_blank">link</a>--}}
 
-                                            <h6 class="font-weight-semi-bold ms-2 mb-0">Ver en el mapa</h6>
+                                            <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{$publicacion->latitud_publicacion . ", " . $publicacion->longitud_publicacion  }}&zoom=20" class="font-weight-semi-bold ms-2 mb-0 h6">Ver en el mapa</a> <br>
                                             <small class="text-muted ms-2">{{$publicacion->calle_publicacion}} - {{$publicacion->altura_publicacion}} - {{$publicacion->ciudad()->first()->nombre_ciudad}}</small>
                                         </div>
                                     </div>
@@ -202,6 +202,9 @@
                     </div>
                 </div>
             </div>
+
+            {{--            Comentarios--}}
+           @livewire('publicaciones.show-coments', ['publicacion' => $publicacion])
         </div>
     </div>
 
@@ -300,7 +303,35 @@
                 // icon: icono
             });
 
+            // trazar una ruta desde la posicion actual del usuario hasta la posicion de la publicacion
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('right-panel'));
 
+            // obtener la posicion actual del usuario
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                // trazar la ruta
+                var start = new google.maps.LatLng(pos.lat, pos.lng);
+                var end = new google.maps.LatLng({{$publicacion->latitud_publicacion}}, {{$publicacion->longitud_publicacion}});
+                var request = {
+                    origin: start,
+                    destination: end,
+                    travelMode: 'DRIVING'
+                };
+                directionsService.route(request, function(result, status) {
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(result);
+                    }
+                });
+
+
+            });
         }
 
 

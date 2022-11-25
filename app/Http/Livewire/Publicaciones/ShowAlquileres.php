@@ -41,7 +41,7 @@ class ShowAlquileres extends Component
         $publicaciones = Publicacion::where('titulo_publicacion', 'LIKE', '%' . $this->search . '%')
             ->orWhere('descripcion_publicacion', 'LIKE', '%' . $this->search . '%')
             ->orderBy('precio_publicacion', $this->ordenar)
-            ->paginate(6);
+            ->paginate(20);
 
             if (count($this->filtroComodidades) > 0) {
             $publicaciones = Publicacion::whereHas('caracteristica_comodidades', function ($query) {

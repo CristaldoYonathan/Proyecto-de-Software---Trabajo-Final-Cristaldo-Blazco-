@@ -15,4 +15,14 @@ class AuditoriaController extends Controller
         $usuarios = User::get();
         return view('auditoria',compact('auditorias','usuarios'));
     }
+
+    public function show(Audit $auditorias)
+    {
+        $usuarios = User::get();
+        return view('auditoriamas',compact('auditorias','usuarios'));
+    }
+//    {
+//        $auditorias = Audit::find($request);
+//        return view('auditoriamas',compact('auditorias'));
+//    }
 }

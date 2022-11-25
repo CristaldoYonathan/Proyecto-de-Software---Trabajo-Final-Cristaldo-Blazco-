@@ -24,7 +24,7 @@
                     <th>Modelo</th>
                     <th></th>
 {{--                    Agregar boton para mostrar mas info--}}
-{{--                    <th>Informacion Antigua</th>--}}
+                    <th>Informacion Antigua</th>
 {{--                    <th>Informacion Nueva</th>--}}
                 </tr>
                 </thead>
@@ -39,8 +39,6 @@
                         <td>{{$auditoria->created_at->format('d-m-Y // H:i' )}}</td>
                         <td> {{substr($auditoria->auditable_type,11)}}   </td>
                         <td>
-{{--                            boton de accion "ver mas"--}}
-                            <a href="{{route('admin.auditoriamas',$auditoria->id)}}" class="btn btn-sm btn-primary">Ver mas</a>
 
 {{--                            @foreach($auditoria->old_values as $old_value)--}}
 {{--                                *{{$old_value}}<br>--}}

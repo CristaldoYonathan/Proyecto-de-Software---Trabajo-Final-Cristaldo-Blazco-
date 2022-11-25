@@ -8,7 +8,7 @@
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre de usuario o email para buscar">
                 </div>
                 <div>
-                    <a href="{{route('admin.users.pdf')}}" class="btn btn-primary">Generar PDF</a>
+                    <a href="{{route('admin.users.pdf')}}" class="btn btn-primary" target="_blank" >Generar PDF</a>
                 </div>
             </div>
         </div>
