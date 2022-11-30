@@ -31,6 +31,8 @@ class PublicacionController extends Controller
             $publicaciones = Publicacion::where('estado_publicacion', 'Alquilado')->where('id_usuario', Auth::user()->id)->get();
         }elseif(Auth::user()->hasRole('propietario')){
             $publicaciones = Publicacion::where('id_usuario', Auth::user()->id)->get();
+        }elseif(Auth::user()->hasRole('admin')){
+            $publicaciones = Publicacion::all();
         }
         //mostrar las publicaciones que tengan el estado en 'Activo' y que pertenezcan al usuario autenticado
 //        $publicaciones = Publicacion::where('estado_publicacion', 'Activo')->where('id_usuario', Auth::user()->id)->get();
@@ -72,7 +74,12 @@ class PublicacionController extends Controller
             $mercadoPagoTransaccion->id_publicacion = $publicacion->id;
             $mercadoPagoTransaccion->save();
 
-            //enviar correo al propietario de la publicacion (ver que onda con el envio de correos)
+//            //enviar correo al propietario de la publicacion (ver que onda con el envio de correos)
+//            //obtener el correo del propietario de la publicacion
+//            $propietario = User::find($publicacion->id_usuario);
+//            $correoPropietario = $propietario->email;
+//            //funcion para enviar correo al propietario de la publicacion
+//            $this->enviarCorreo($correoPropietario, $publicacion);
 //            $propietario = User::find($publicacion->id_usuario);
 //            $propietario->notify(new \App\Notifications\PublicacionAlquilada($publicacion));
 

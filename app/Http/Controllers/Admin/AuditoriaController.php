@@ -16,10 +16,17 @@ class AuditoriaController extends Controller
         return view('auditoria',compact('auditorias','usuarios'));
     }
 
-    public function show(Audit $auditorias)
+    public function show(Audit $auditoria)
     {
-        $usuarios = User::get();
-        return view('auditoriamas',compact('auditorias','usuarios'));
+//        $usuarios = User::get();
+//        $usuario = User::find($auditorias->user_id);
+
+//        $auditorias = Audit::find($auditorias->id);
+//        $auditorias = Audit::find(1);
+
+        $prueba = Audit::find($auditoria->user_type);
+
+        return view('auditoriamas',compact('auditoria','prueba'));
     }
 //    {
 //        $auditorias = Audit::find($request);

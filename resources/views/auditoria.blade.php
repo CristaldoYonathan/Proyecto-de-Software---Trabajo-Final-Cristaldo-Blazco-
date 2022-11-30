@@ -40,7 +40,7 @@
                         <td> {{substr($auditoria->auditable_type,11)}}   </td>
                         <td>
 {{--                            boton de accion "ver mas"--}}
-                            <a href="{{route('admin.auditoriamas',$auditoria->id)}}" class="btn btn-sm btn-primary">Ver mas</a>
+                            <a href="{{route('admin.auditoriamas',$auditoria)}}" class="btn btn-sm btn-primary">Ver mas</a>
 
 {{--                            @foreach($auditoria->old_values as $old_value)--}}
 {{--                                *{{$old_value}}<br>--}}

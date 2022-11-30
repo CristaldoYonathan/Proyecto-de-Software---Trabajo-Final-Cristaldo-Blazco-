@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\AuditoriaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\OCRController;
 use App\Http\Controllers\WebHooksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicacionController;
+use App\Http\Controllers\CharjsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,14 @@ use App\Http\Controllers\PublicacionController;
 //Pagina de Inicio
 Route::view('/','welcome')->name('inicio');
 
+//Prueba OCR
+Route::get('/ocr', [OCRController::class, 'ocr'])->name('ocr');
+Route::post('/upload', [OCRController::class, 'upload'])->name('upload');
+
+//Pagina de Graficos
+Route::get('/admin/graficos',[CharjsController::class,'grafClientes'])->name('admin.graficos');
+
+
 //Pagina Borrado de Publicaciones
 Route::get('/publicaciones/borrado',[PublicacionController::class,'borrado'])->name('publicaciones.borrado');
 Route::get('/publicaciones/borradores/borrado',[PublicacionController::class,'borradoUsuario'])->name('publicaciones.borradoUsuario');
@@ -35,7 +45,7 @@ Route::post('/publicaciones/borrado/{id}/destroy',[PublicacionController::class,
 
 //Pagina de Auditoria//No funcionaba en otros lados
 Route::get('/admin/auditoria', [AuditoriaController::class, 'index']) -> name('admin.auditoria');
-Route::get('/admin/auditoriamas', [AuditoriaController::class, 'show']) -> name('admin.auditoriamas');
+Route::get('/admin/auditoriamas/{auditoria}', [AuditoriaController::class, 'show']) -> name('admin.auditoriamas');
 
 //Pagina de Publicaciones
 Route::get('/registroPropiedad',[PublicacionController::class, 'index'])->name('publicaciones.index');//Pagina principal para el registro de propiedad

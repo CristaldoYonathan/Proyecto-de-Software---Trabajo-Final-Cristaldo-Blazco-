@@ -344,7 +344,13 @@ return [
 //            'label'       => 4,
 //            'label_color' => 'success',
         ],
-
+        [
+            'text'        => 'Graficos',
+            'url'         => 'admin/graficos',
+            'icon'        => 'fa fa-pie-chart',
+//            'label'       => 4,
+//            'label_color' => 'success',
+        ]
 //        [
 //            'text'        => 'pages',
 //            'url'         => 'admin/pages',

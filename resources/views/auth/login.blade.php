@@ -5,6 +5,50 @@
 
 @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css','resources/js/material-kit.js' ])
 
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs-rtl.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs-rtl.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs-rtl.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs-rtl.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs-rtl.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs-rtl.min.css">--}}
+{{--    incorporar CDN intro.js--}}
+
+{{--    <link rel="stylesheet">--}}
+
+{{--    --}}{{--    incorporar CDN intro.js javascript--}}
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"></script>--}}
+    {{--    incorporar CDN intro.js javascript--}}
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"></script>--}}
 
 
 <div class="page-header align-items-start min-vh-100" style="background-image: url('https://www.byverdleds.com/blog/wp-content/uploads/2019/08/LedSalon.jpg');" loading="lazy">
@@ -17,7 +61,7 @@
                         <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                             <a href="{{ route('dashboard') }}"> <h3  class="text-white font-weight-bolder text-center mt-2 mb-0" >Easy-Rent</h3></a>
 
-                            <h6 class="text-white font-weight-bolder text-center mt-2 mb-0">Iniciar sesión</h6>
+                            <h6 id="introduction" class="text-white font-weight-bolder text-center mt-2 mb-0">Iniciar sesión</h6>
                             <div class="row mt-4">
                             </div>
                         </div>
@@ -68,6 +112,9 @@
                                     Aun no tiene una cuenta?
                                 </a>
                             </div>
+                            <div>
+                                <a id="ayuda" href="#">Ayuda</a>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -78,7 +125,47 @@
 </div>
 {{--    </x-jet-authentication-card>--}}
 
+    <script>
+        const intro = introJs();
 
+        intro.setOptions({
+            steps: [
+                {
+                    element: '#introduction',
+                    intro: "Bienvenido a Easy-Rent, le invitamos a que inicie sesion para poder acceder a nuestro sistema de alquileres."
+                },
+                {
+                    element: '#email',
+                    intro: "Ingrese su correo electronico para poder iniciar sesion."
+                },
+                {
+                    element: '#password',
+                    intro: "Ingrese su contraseña para poder iniciar sesion."
+                },
+                {
+                    element: '#remember_me',
+                    intro: "Si desea que su sesion sea permanente seleccione esta opcion."
+                },
+                {
+                    element: '.btn',
+                    intro: "Presione este boton para iniciar sesion."
+                },
+                {
+                    element: '.text-sm',
+                    intro: "Si aun no tiene una cuenta presione aqui para registrarse."
+                },
+                {
+                    element: '.text-body',
+                    intro: "Si olvido su contraseña presione aqui para recuperarla."
+                },
+            ]
+        });
+
+        document.querySelector('#ayuda').addEventListener('click',function(){
+            intro.start();
+        });
+
+    </script>
 
 
 

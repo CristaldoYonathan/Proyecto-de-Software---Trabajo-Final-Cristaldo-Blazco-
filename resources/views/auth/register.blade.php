@@ -1,4 +1,5 @@
 <x-guest-layout>
+
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
@@ -57,4 +58,46 @@
             </div>
         </form>
     </x-jet-authentication-card>
+
+    <script>
+        const intro = introJs();
+
+        intro.setOptions({
+            steps: [
+                {
+                    element:'#introduction',
+                    intro: "Bienvenido a la página de registro de usuarios. En esta página podrás registrarte para poder acceder a la aplicación."
+                },
+                {
+                    element:'#name',
+                    intro: "En este campo deberás introducir tu nombre."
+                },
+                {
+                    element:'#email',
+                    intro: "En este campo deberás ingresar tu correo electrónico."
+                },
+                {
+                    element:'#password',
+                    intro: "En este campo deberás ingresar tu contraseña."
+                },
+                {
+                    element:'#password_confirmation',
+                    intro: "En este campo deberás ingresar nuevamente tu contraseña."
+                },
+                // {
+                //     element:'#terms',
+                //     intro: "En este campo deberás aceptar los términos y condiciones de uso de la aplicación."
+                // },
+                {
+                    element:'.ml-4',
+                    intro: "Al finalizar el registro, deberás presionar el botón de registrar para poder acceder a la aplicación."
+                },
+                {
+                    element:'.justify-end',
+                    intro: "Si ya tienes una cuenta, deberás presionar el botón de iniciar sesión para poder acceder a la aplicación."
+                }
+            ]
+        });
+        intro().start();
+    </script>
 </x-guest-layout>
