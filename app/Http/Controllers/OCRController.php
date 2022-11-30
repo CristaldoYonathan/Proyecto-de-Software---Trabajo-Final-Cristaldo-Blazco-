@@ -64,7 +64,7 @@ class OCRController extends Controller
             }
         }
 
-        echo $pdfText;
+        return view('ocr', ['status' => $status, 'statusMsg' => $statusMsg, 'pdfText' => $pdfText]);
 
 //        return view('ocr', ['status' => $status, 'statusMsg' => $statusMsg, 'pdfText' => $pdfText]);
     }
