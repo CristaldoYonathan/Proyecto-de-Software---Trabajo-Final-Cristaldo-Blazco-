@@ -3,7 +3,7 @@
     @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/nucleo-svg.css'])
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
-    <x-slot name="title">Registrar Propiedad</x-slot>
+    <x-slot name="title">Registrar Contrato</x-slot>
 
 
     <body>
@@ -15,7 +15,7 @@
         <div class="container my-auto">
             <div class="row">
                 <div class="col-lg-7 col-md-10">
-                    <h1 class="text-white">Consulte sus propiedades</h1>
+                    <h1 class="text-white">Consulte los contratos creados</h1>
                 </div>
             </div>
             <div class="container mt-sm-5 mt-3">
@@ -28,7 +28,7 @@
                                     <input class="form-control" placeholder="Buscar" type="text" >
                                 </div>
                                 <div>
-                                    <a href="{{route('publicaciones.create')}}" class="btn btn-primary">Publicar una nueva propiedad</a>
+                                    <a href="{{route('contratos.create')}}" class="btn btn-primary">Definir un nuevo contrato</a>
                                 </div>
                             </div>
                         </div>
@@ -38,12 +38,12 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-15">Publicacion</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-15">Contrato</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-15 ps-2">Tipo</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-15">Estado</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-15">Fecha de publicacion</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-15">Tipo de contrato</th>
-                                        <th></th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-15">Fecha de celebracion</th>
+{{--                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-15">Tipo de contrato</th>--}}
+{{--                                        <th></th>--}}
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -51,60 +51,57 @@
 
                                     <tbody>
 
-                                    @foreach($publicaciones as $publicacion)
+                                    @foreach($contratos as $contrato)
                                     <tr style="height:100px">
                                         <td>
                                             <div class="d-flex px-2 py-1">
-                                                <div class="">
-                                                    <img src="
-                                                    @foreach($imagenes as $imagen)
-                                                    @if($imagen->id_publicacion == $publicacion->id)
-                                                        {{asset($imagen->url_imagen)}}
-                                                        @break
-                                                    @endif
-                                                    @endforeach"
-                                                    class="avatar avatar-sm me-3" alt="user1">
-                                                </div>
+{{--                                                <div class="">--}}
+{{--                                                    <img src="--}}
+{{--                                                    @foreach($imagenes as $imagen)--}}
+{{--                                                    @if($imagen->id_publicacion == $publicacion->id)--}}
+{{--                                                        {{asset($imagen->url_imagen)}}--}}
+{{--                                                        @break--}}
+{{--                                                    @endif--}}
+{{--                                                    @endforeach"--}}
+{{--                                                    class="avatar avatar-sm me-3" alt="user1">--}}
+{{--                                                </div>--}}
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h3 class="mb-0"><a href="{{route('publicaciones.show',$publicacion->id)}}"  target="_blank" title="{{$publicacion->titulo_publicacion}}">{{substr($publicacion->titulo_publicacion,0,17)}}@if(strlen($publicacion->titulo_publicacion)>17)...@endif
+{{--                                                    <h3 class="mb-0"><a href="{{route('contratos.show',$contrato->id)}}"  target="_blank" title="{{$contrato->titulo_publicacion}}">{{substr($contrato->titulo_publicacion,0,17)}}@if(strlen($contrato->titulo_publicacion)>17)...@endif--}}
 
                                                         </a></h3>
-                                                    <p class="text-xs text-secondary mb-0">$ {{$publicacion->precio_publicacion}}</p>
+{{--                                                    <p class="text-xs text-secondary mb-0">$ {{$publicacion->precio_publicacion}}</p>--}}
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            @foreach($tiposPropiedades as $tipo)
-                                                @if($tipo->id == $publicacion->id_tipo_propiedad)
-                                                    <p class="text-xs font-weight-bold mb-0">{{$tipo->nombre_tipo_propiedad}}</p>
-                                                @endif
-                                            @endforeach
+{{--                                            @foreach($tiposPropiedades as $tipo)--}}
+{{--                                                @if($tipo->id == $publicacion->id_tipo_propiedad)--}}
+{{--                                                    <p class="text-xs font-weight-bold mb-0">{{$tipo->nombre_tipo_propiedad}}</p>--}}
+{{--                                                @endif--}}
+{{--                                            @endforeach--}}
 
                                         </td>
                                         <td class="align-middle text-center">
-                                            <span class="badge bg-gradient-success">{{$publicacion->estado_publicacion}}</span>
+{{--                                            <span class="badge bg-gradient-success">{{$publicacion->estado_publicacion}}</span>--}}
                                         </td>
 {{--                                        <td class="align-middle text-center">--}}
 {{--                                            <span class="text-secondary text-xs font-weight-normal">420(Ver si implementar)</span>--}}
 {{--                                        </td>--}}
                                         <td class="align-middle text-center">
-                                            <span class="text-secondary text-xs font-weight-normal">{{$publicacion->created_at->format('d-m-Y')}}</span>
+{{--                                            <span class="text-secondary text-xs font-weight-normal">{{$publicacion->created_at->format('d-m-Y')}}</span>--}}
                                         </td>
                                         <td class="align-middle text-center">
                                             <span class="badge bg-gradient-success">XXXXX</span>
                                         </td>
-                                        <td>
-                                            <a href="{{route('contratos.index')}}" class="fa fa-file-text-o" data-toggle="tooltip" title="Definir contrato"></a>
-                                        </td>
                                         <td class="align-middle">
 {{--                                            <a href="{{route('publicaciones.edit',$publicacion)}}:" class="fas fa-edit" data-toggle="tooltip" data-original-title="Editar"></a>--}}
-                                            <a href="{{route('publicaciones.edit',$publicacion)}}" class="fas fa-edit" data-toggle="tooltip" title="Editar publicación"></a>
+                                            <a href="{{route('contratos.edit',$contrato)}}" class="fas fa-edit" data-toggle="tooltip" title="Editar contrato"></a>
 
                                         </td>
                                         <td class="align-middle">
-                                            <form action="{{route('publicaciones.destroy',$publicacion)}}" method="POST">
+                                            <form action="{{route('contratos.destroy',$contrato)}}" method="POST">
                                                 @csrf @method('DELETE')
-                                                <button type="submit" class="fa fa-house-damage" data-toggle="tooltip" title="Desactivar publicación"></button>
+                                                <button type="submit" class="fa fa-house-damage" data-toggle="tooltip" title="Deshabilitar contrato"></button>
 
                                             </form>
                                     </tr>

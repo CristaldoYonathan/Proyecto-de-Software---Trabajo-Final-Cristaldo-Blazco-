@@ -103,7 +103,7 @@
                             <div class="row align-items-start">
                                 <h3 class="font-weight-semi-bold mb-4 col">$ {{ number_format($publicacion->precio_publicacion, 2, ',', '.')  }} ARS</h3>
                                 {{--           -----------------ACÁ VA EL BOTÓN DE MERCADO PAGO-----------------------------------------------------------}}
-                                <a href="#" class="btn btn-primary btn-block col">Alquilar</a>
+                                <a href="#" class="btn btn-primary btn-block col">Solicitar Alquiler</a>
                                 <div class="cho-container"></div>
                                 {{--           -----------------ACÁ VA EL BOTÓN DE MERCADO PAGO-----------------------------------------------------------}}
                             </div>

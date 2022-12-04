@@ -105,9 +105,9 @@ return new class extends Migration
         });
 
         //una publicacion tiene muchas transacciones de mercado pago
-        Schema::table('mercado-pago-transacciones', function (Blueprint $table) {
-            $table->foreignId('id_publicacion')->constrained('publicacion');
-        });
+//        Schema::table('mercado-pago-transacciones', function (Blueprint $table) {
+//            $table->foreignId('id_publicacion')->constrained('publicacion');
+//        });
 
         //crear tabla caracteristica_comodidad sin clave foranea
         Schema::create('caracteristica_comodidad', function (Blueprint $table) {

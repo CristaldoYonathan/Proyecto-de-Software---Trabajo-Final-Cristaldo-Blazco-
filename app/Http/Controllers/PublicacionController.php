@@ -11,6 +11,7 @@ use App\Models\Provincia;
 use App\Models\Publicacion;
 use App\Models\TipoPropiedad;
 use App\Models\User;
+use App\Models\Contrato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,8 @@ class PublicacionController extends Controller
 
     public function pagar(Publicacion $publicacion, Request $request){
 
+        $contrato = Contrato::where('id_publicacion', $publicacion->id)->where('id_usuario', Auth::user()->id)->first();
+
         $payment_id = $request->get('payment_id');
 
         $respuesta = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-141489167613208-102209-72a86348e61a8e789f1e8739cf212924-1222873954");
@@ -71,7 +74,7 @@ class PublicacionController extends Controller
             $mercadoPagoTransaccion->tipo_pago = $payment_type_id;
             $mercadoPagoTransaccion->id_usuario = Auth::user()->id;
             $mercadoPagoTransaccion->nombre_usuario = Auth::user()->name;
-            $mercadoPagoTransaccion->id_publicacion = $publicacion->id;
+            $mercadoPagoTransaccion->id_contrato = $contrato->id;
             $mercadoPagoTransaccion->save();
 
 //            //enviar correo al propietario de la publicacion (ver que onda con el envio de correos)

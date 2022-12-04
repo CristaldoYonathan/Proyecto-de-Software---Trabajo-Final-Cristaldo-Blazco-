@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuditoriaController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ContratoController;
 use App\Http\Controllers\OCRController;
 use App\Http\Controllers\WebHooksController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +57,15 @@ Route::get('/registroPropiedad/{publicacion}/edit',[PublicacionController::class
 Route::get('/registroPropiedad/{publicacion}/pagar',[PublicacionController::class, 'pagar'])->name('publicaciones.pagar');//Pagar Publicacion
 Route::patch('/registroPropiedad/{publicacion}',[PublicacionController::class, 'update'])->name('publicaciones.update');//Cambiar en BD Publicacion
 Route::delete('/registroPropiedad/{publicacion}',[PublicacionController::class, 'destroy'])->name('publicaciones.destroy');//Eliminar Publicacion
+
+//Pagina de Contratos
+Route::get('/contratos',[ContratoController::class, 'index'])->name('contratos.index');//Pagina principal para ver los contratos registrados
+Route::get('/contratos/create',[ContratoController::class, 'create'])->name('contratos.create');//Crear Contrato
+Route::post('/contratos',[ContratoController::class,'store'])->name('contratos.store');//Alcenar en la base de datos
+Route::get('/contratos/{contrato}',[ContratoController::class, 'show'])->name('contratos.show');//Consultar Contrato
+Route::get('/contratos/{contrato}/edit',[ContratoController::class, 'edit'])->name('contratos.edit');//Modificar Contrato
+Route::patch('/contratos/{contrato}',[ContratoController::class, 'update'])->name('contratos.update');//Cambiar en BD Contrato
+Route::delete('/contratos/{contrato}',[ContratoController::class, 'destroy'])->name('contratos.destroy');//Eliminar Contrato
 
 //Pagina de Alquileres
 Route::view('/alquileres','alquileres')->name('alquileres');

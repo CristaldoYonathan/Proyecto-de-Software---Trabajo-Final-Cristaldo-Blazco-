@@ -28,7 +28,7 @@
                                 <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">Tipo de Propiedad</button>
                                 <button class="multisteps-form__progress-btn" type="button" title="Address">Ubicación</button>
                                 <button class="multisteps-form__progress-btn" type="button" title="Order Info">Características</button>
-                                <button class="multisteps-form__progress-btn" type="button" title="Comments">Imágenes</button>
+                                <button class="multisteps-form__progress-btn" type="button" title="Comments">Encabezado de la publicación</button>
                                 <button class="multisteps-form__progress-btn" type="button" title="Comments">Caracerísticas específicas</button>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
 
                                 <!--PANEL IMAGENES-->
                                 <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
-                                    <h3 class="multisteps-form__title">Fotos de la propiedad. Puede cargar hasta 5 imagenes</h3>
+                                    <h3 class="multisteps-form__title">Título y descripción de la propiedad</h3>
                                     <div class="multisteps-form__content">
 
                                         <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
@@ -204,8 +204,11 @@
                                             </div>
                                         </div>
 
+{{--                                     Esta imagen va a ser la primera que aparezca --}}
+                                        <h3 class="mt-4">Imagenes</h3>
                                         <div class="form-row mt-4  shadow-none p-3 mb-5 bg-light rounded">
                                             <div class="col">
+                                                <h6>Esta sera la imagen de portada de la publicacion</h6>
                                                 <input name="file" type="file" accept="image/*" value="{{old('imagen')}}">
                                                 @error('file')
                                                 <small style="color:red">{{$message}}</small>
