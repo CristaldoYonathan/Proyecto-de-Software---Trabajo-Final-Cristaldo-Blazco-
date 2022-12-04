@@ -1,10 +1,12 @@
 <x-app-layout>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     @vite(['resources/css/material-kit.css', 'resources/css/nucleo-icons.css','resources/css/multistep.css', 'resources/js/multistep.js', 'resources/css/nucleo-svg.css', 'resources/js/map.js', 'resources/js/bootstrap.js'])
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
 
 
     <body class="container bg-gray-200">
@@ -192,7 +194,23 @@
                                 {{--                            Mapa PROVICIONAL--}}
                                 <div class="w-90 m-auto">
                                     <div class="form-row mt-4 shadow-none p-1 mb- bg-light rounded">
-                                        <div id="map" style="width: 100%; height:600px"></div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12 mt-3">
+                                                    <div class="text-center">
+                                                        <button type="button" class="btn btn-primary w-45" id="btn-ubicacion">Ver ubicación</button>
+                                                        <button type="button" class="btn btn-primary w-45 " id="btn-calcular">Calcular ruta</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div id="map1" style="width: 100%; height:600px"></div>
+                                        <div id="map2" style="width: 100%; height:600px"></div>
+                                        {{--                                        longitud y latitud en hidden--}}
+                                        <input type="hidden" id="latitud" value="{{$publicacion->latitud_publicacion}}">
+                                        <input type="hidden" id="longitud" value="{{$publicacion->longitud_publicacion}}">
                                     </div>
                                 </div>
 
@@ -238,7 +256,8 @@
 
     {{--    SDK MercadoPago.js V2--}}
     <script src="https://sdk.mercadopago.com/js/v2"></script>
-
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
     <script>
         const mp = new MercadoPago("{{config('services.mercadopago.key')}}", {
@@ -283,66 +302,11 @@
         }
     </script>
 
-    <script>
-
-        function iniciarMap(){
-
-            // Obtenemos la posicion de la publicacion
-            var posicion = {lat: {{$publicacion->latitud_publicacion}}, lng: {{$publicacion->longitud_publicacion}}};
-
-            // Creamos el mapa
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: posicion
-            });
-
-            // Creamos el marker
-            var marker = new google.maps.Marker({
-                position: posicion,
-                map: map,
-                // icon: icono
-            });
-
-            // trazar una ruta desde la posicion actual del usuario hasta la posicion de la publicacion
-            var directionsService = new google.maps.DirectionsService;
-            var directionsDisplay = new google.maps.DirectionsRenderer;
-            directionsDisplay.setMap(map);
-            directionsDisplay.setPanel(document.getElementById('right-panel'));
-
-            // obtener la posicion actual del usuario
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                // trazar la ruta
-                var start = new google.maps.LatLng(pos.lat, pos.lng);
-                var end = new google.maps.LatLng({{$publicacion->latitud_publicacion}}, {{$publicacion->longitud_publicacion}});
-                var request = {
-                    origin: start,
-                    destination: end,
-                    travelMode: 'DRIVING'
-                };
-                directionsService.route(request, function(result, status) {
-                    if (status === 'OK') {
-                        directionsDisplay.setDirections(result);
-                    }
-                });
 
 
-            });
-        }
-
-
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFRitCKrHHCHbh9KlJed9j697DDQEW-Go&callback=iniciarMap"></script>
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{{--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--}}
+{{--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>--}}
+{{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>--}}
 
     </body>
 </x-app-layout>
