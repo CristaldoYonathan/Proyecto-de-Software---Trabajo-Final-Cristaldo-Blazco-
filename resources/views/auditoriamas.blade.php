@@ -3,38 +3,38 @@
 @section('title', 'Easy-Rent')
 
 @section('content_header')
+    <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.auditoria')}}">volver al listado</a>
     <h1>Mas informacion sobre los registros de actividad</h1>
 @stop
 
 @section('content')
 
     <div class="w-full h-max flex flex-col p-1">
-        <div class="mx-2 flex flex-col items-start justify-start">
-            <h3 class="text-base text-zinc-800 capitalize">registro de auditoria: cambios</h3>
-            <div>
-                <a href="{{route('admin.auditoria')}}">volver al listado</a>
-            </div>
-            <h1>{{$prueba}}</h1>
-        </div>
+{{--        <div class="container">--}}
+{{--            <h3 class="text-base text-zinc-800 capitalize">registro de auditoria: cambios</h3>--}}
+
+{{--                <a class="btn btn-primary btn-sm col align-self-end" href="{{route('admin.auditoria')}}">volver al listado</a>--}}
+
+{{--        </div>--}}
         {{-- cabecera de informacion general --}}
         <div class="mx-2 my-2 p-2 mb-4 flex flex-row items-start justify-start border border-zinc-300 border-collapse">
             {{-- informacion de operacion --}}
             <div class="mr-1 p-2">
-                <h4 class="block text-sm uppercase font-semibold tracking-wider text-zinc-600">Informacion de la operación:</h4>
+                <h5 class="text-bold">Informacion de la operación:</h5>
                 <div class="flex my-1">
-                    <h4 class="block text-sm font-semibold tracking-wider text-zinc-600">operacion:</h4>
-{{--                    <span class="text-sm mx-1 px-1 text-zinc-800 bg-green-300">{{($auditorias->event)}} de datos.</span>--}}
+                    <h6 class="text-bold mt-3">Operacion:</h6>
+                    <span >{{($auditoria->event)}} de datos.</span>
                 </div>
                 <div class="flex my-1">
-                    <h4 class="block text-sm font-semibold tracking-wider text-zinc-600">fecha de operación:</h4>
-                    <span class="text-sm mx-1 px-1 text-zinc-800">
-{{--                        {{ \Carbon\Carbon::parse($auditorias->created_at)->locale('es_Ar')->format('d-m-Y H:i') }} Hrs.--}}
+                    <h6 class="text-bold">Fecha de operación:</h6>
+                    <span >
+                        {{ \Carbon\Carbon::parse($auditoria->created_at)->locale('es_Ar')->format('d-m-Y H:i') }} Hrs.
                     </span>
                 </div>
                 <div class="flex my-1">
-                    <h4 class="block text-sm font-semibold tracking-wider text-zinc-600">tabla afectada:</h4>
+                    <h6 class="text-bold">Tabla afectada:</h6>
                     <span>
-                        {{$auditorias->auditable_type}}
+                        {{$auditoria->auditable_type}}
                     </span>
                 </div>
             </div>
@@ -70,47 +70,54 @@
             </div>
         </div>
         {{-- estado actual del registro a la fecha --}}
-        <div class="mx-2 my-1 flex flex-col items-start justify-start">
-            <span class="block text-sm font-semibold tracking-wider text-zinc-600"
-                  title="esta primera tabla detalla el estado de cada atributo del registro segun la fecha de operación">Estado
-                del registro a la fecha de cambio: <i class="fa-solid fa-circle-info"></i></span>
+        <div class="mx-2 my-1 flex flex-col items-start justify-start mt-3">
+            <span class="text-bold"
+                  title="esta primera tabla detalla el estado de cada atributo del registro segun la fecha de operación">Estado anterior <i class="fa-solid fa-circle-info"></i></span>
         </div>
         <table class="m-2 border border-zinc-300 border-collapse">
-{{--            @if (count($auditorias->new_values) !== 0)--}}
-{{--                @foreach ($auditorias->new_values as $attribute => $value)--}}
-{{--                    <tr>--}}
-{{--                        <x-tables.th-cell class="text-left w-1/4">{{ __($attribute) }}</x-tables.th-cell>--}}
-{{--                        <x-tables.td-cell>{{ $value }}</x-tables.td-cell>--}}
-{{--                    </tr>--}}
-{{--                @endforeach--}}
-{{--            @else--}}
-{{--                <tr>--}}
-{{--                    <x-tables.td-cell>no existe un estado nuevo.</x-tables.td-cell>--}}
-{{--                </tr>--}}
-{{--            @endif--}}
+            <thead class="bg-zinc-300">
+            <tr>
+                <th class="p-1 border
+                border-zinc-300 border-collapse">Atributo</th>
+                <th class="p-1 border
+                border-zinc-300 border-collapse">Valor</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($auditoria->old_values as $key => $value)
+                <tr>
+                    <td class="p-1 border
+                    border-zinc-300 border-collapse">{{$key}}</td>
+                    <td class="p-1 border
+                    border-zinc-300 border-collapse">{{$value}}</td>
+                </tr>
+            @endforeach
+            </tbody>
         </table>
         {{-- estado anterior del registro --}}
-        <div class="mx-2 flex flex-col items-start justify-start">
-            <span class="block text-sm font-semibold tracking-wider text-zinc-600"
-                  title="esta segunda tabla detalla el estado de cada atributo antes de la operación, si existiere">Estado
-                anterior: <i class="fa-solid fa-circle-info"></i></span>
+        <div class="mx-2 flex flex-col items-start justify-start mt-3">
+            <span class="text-bold"
+                  title="esta segunda tabla detalla el estado de cada atributo antes de la operación, si existiere">Estado nuevo:  <i class="fa-solid fa-circle-info"></i></span>
         </div>
         <table class="m-2 border border-zinc-300 border-collapse">
-{{--            @if (count($auditorias->old_values) !== 0)--}}
-{{--                @foreach ($auditorias->old_values as $attribute => $value)--}}
-{{--                    <tr>--}}
-{{--                        --}}{{-- cabecera con estilos especiales --}}
-{{--                        <th--}}
-{{--                            class="px-1 text-xs text-left w-1/4 border border-zinc-300 uppercase font-bold bg-zinc-400 text-white">--}}
-{{--                            {{ __($attribute) }}</th>--}}
-{{--                        <x-tables.td-cell>{{ $value }}</x-tables.td-cell>--}}
-{{--                    </tr>--}}
-{{--                @endforeach--}}
-{{--            @else--}}
-{{--                <tr>--}}
-{{--                    <x-tables.td-cell>no existe un estado anterior.</x-tables.td-cell>--}}
-{{--                </tr>--}}
-{{--            @endif--}}
+            <thead class="bg-zinc-300">
+            <tr>
+                <th class="p-1 border
+                border-zinc-300 border-collapse">atributo</th>
+                <th class="p-1 border
+                border-zinc-300 border-collapse">valor</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($auditoria->new_values as $key => $value)
+                <tr>
+                    <td class="p-1 border
+                    border-zinc-300 border-collapse">{{$key}}</td>
+                    <td class="p-1 border
+                    border-zinc-300 border-collapse">{{$value}}</td>
+                </tr>
+            @endforeach
+            </tbody>
         </table>
     </div>
 

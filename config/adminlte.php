@@ -347,7 +347,7 @@ return [
         [
             'text'        => 'Graficos',
             'url'         => 'admin/graficos',
-            'icon'        => 'fa fa-pie-chart',
+            'icon'        => 'fas fa-fw fa-chart-line',
 //            'label'       => 4,
 //            'label_color' => 'success',
         ]
